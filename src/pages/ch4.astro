@@ -1,7 +1,619 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ComingSoon from "../components/ComingSoon.astro";
+import Term from "../components/Term.astro";
 ---
-<Layout title="Understanding Financial Statements" description="บทที่ 4 — อ่านงบ 3 ตัวหลักให้เป็น — งบกำไรขาดทุน, งบแสดงฐานะการเงิน และงบกระแสเงินสด">
-  <ComingSoon n={4} title="Understanding Financial Statements" accent="var(--coral)" blurb="อ่านงบ 3 ตัวหลักให้เป็น — งบกำไรขาดทุน, งบแสดงฐานะการเงิน และงบกระแสเงินสด" />
+<Layout title="Understanding Financial Statements" description="บทที่ 4 — อ่านงบกำไรขาดทุน งบฐานะการเงิน และงบกระแสเงินสดให้เป็น พร้อมตัวอย่างการคำนวณค่าเสื่อมราคา ดอกเบี้ยค้างจ่าย และอัตราส่วนทางการเงิน">
+
+  <header class="masthead">
+    <p class="eyebrow" style="color:var(--coral)">Financial Statement Analysis · บทที่ 4</p>
+    <h1>Understanding Financial Statements</h1>
+    <p class="deck">บทที่ 2-3 ปูกลไกและกรอบแนวคิดไว้แล้ว บทนี้ลงมืออ่านงบทั้ง 3 ตัวจริง ๆ — งบกำไรขาดทุนบอกผลการดำเนินงาน งบฐานะการเงินบอกว่ามีอะไรอยู่ในมือ และงบกระแสเงินสดบอกว่าเงินสดจริง ๆ ไหลไปไหนมาไหนบ้าง (ซึ่งมักจะ<b>ไม่ตรง</b>กับกำไรสุทธิเลย)</p>
+    <div class="credit-bar">
+      <span>Multiple-step IS</span><span>Current vs Fixed Assets</span><span>Depreciation</span><span>Liquidity/Solvency Ratios</span><span>FCFF / FCFE</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="grid-2">
+      <div class="card">
+        <h3>เชื่อมจากที่รู้แล้ว</h3>
+        <ul>
+          <li>จากบทที่ 2 เรารู้แล้วว่า A = L + E และกำไรสุทธิไหลผ่านกำไรสะสมไปเชื่อมงบฐานะการเงินสองช่วงเวลาเข้าด้วยกัน</li>
+          <li>สิ่งที่ยังไม่เคยพูดถึง: แต่ละบรรทัดในงบทั้ง 3 ตัวคำนวณมายังไง และทำไม "กำไรสุทธิเป็นบวก" กับ "มีเงินสดพอใช้" ถึงเป็นคนละเรื่องกันได้</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>สิ่งที่บทนี้ครอบคลุม</h3>
+        <ul>
+          <li><b>Part 1 — งบกำไรขาดทุน</b> — โครงสร้าง, รูปแบบ, เครื่องมือวิเคราะห์</li>
+          <li><b>Part 2 — งบฐานะการเงิน</b> — สินทรัพย์/หนี้สิน/ส่วนของเจ้าของ, ค่าเสื่อมราคา, อัตราส่วนสภาพคล่อง/ความสามารถชำระหนี้</li>
+          <li><b>Part 3 — งบกระแสเงินสด</b> — ทำไมสำคัญ, Common-size, FCFF/FCFE, อัตราส่วนกระแสเงินสด</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PART 1 — INCOME STATEMENT -->
+  <!-- ============================================================ -->
+  <section class="act-title" style="margin-top:60px">
+    <span style="display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--slate);font-weight:700;margin-bottom:6px">Part 1</span>
+    <h2 style="margin:0 0 8px;font-size:1.4rem;font-weight:800">งบกำไรขาดทุน (Income Statement)</h2>
+    <p style="margin:0;color:var(--ink-2);max-width:72ch">แสดงผลการดำเนินธุรกิจของกิจการ<b>ในช่วงเวลาหนึ่ง</b> — รายได้ ค่าใช้จ่าย กำไรสุทธิ และกำไรต่อหุ้น นักวิเคราะห์หุ้นสนใจเพราะตลาดให้มูลค่าสูง/ต่ำตามการเติบโตของกำไร ส่วนนักวิเคราะห์ตราสารหนี้สนใจเพื่อประเมินความสามารถในการจ่ายหนี้ตลอดวัฏจักรธุรกิจ</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="4" y="4" width="18" height="18" rx="3" fill="none" stroke="var(--slate)" stroke-width="1.8"/>
+        <line x1="8" y1="10" x2="18" y2="10" stroke="var(--slate)" stroke-width="1.6"/>
+        <line x1="8" y1="14" x2="18" y2="14" stroke="var(--slate)" stroke-width="1.6"/>
+        <line x1="8" y1="18" x2="14" y2="18" stroke="var(--slate)" stroke-width="1.6"/>
+      </svg>
+      <h2>2 รูปแบบของงบกำไรขาดทุน</h2>
+    </div>
+    <p class="sec-sub">รูปแบบที่นิยมและเหมาะกับการวิเคราะห์มากกว่าคือ <b>Multiple-step Format</b> เพราะแสดงจุดคำนวณย่อยหลายจุดก่อนถึงกำไรสุทธิ ทำให้เห็นที่มาแต่ละชั้นชัดเจน</p>
+
+    <div class="grid-2">
+      <div class="knob">
+        <span class="where c1">นิยมกว่า — ใช้วิเคราะห์</span>
+        <h3>Multiple-step Format</h3>
+        <pre>กำไรขั้นต้น              xx
+กำไรจากการดำเนินงาน      xx
+กำไรก่อนหักภาษี          xx
+กำไรสุทธิ                xx</pre>
+        <p class="why" style="margin:0">คำนวณผ่านหลายขั้นก่อนถึงกำไรสุทธิ — แต่ละขั้นคือ "เครื่องมือวิเคราะห์" แยกกันได้ (ดูหัวข้อ EBIT, EBT ด้านล่าง)</p>
+      </div>
+      <div class="knob">
+        <span class="where c2">แบบขั้นเดียว</span>
+        <h3>Single-step Format</h3>
+        <pre>รายได้:
+  ยอดขายสุทธิ                       xx
+  ดอกเบี้ยรับ                       xx
+                                    xx
+ต้นทุนและค่าใช้จ่าย:
+  ต้นทุนขาย                         xx
+  ค่าใช้จ่ายขายและบริหาร            xx
+  ดอกเบี้ยจ่าย                      xx
+  ภาษีจ่าย                          xx
+                                    xx
+กำไรสุทธิ                           xx</pre>
+        <p class="why" style="margin:0">แบ่งแค่ 2 กลุ่มใหญ่ (รายได้ / ค่าใช้จ่าย) แล้วลบกันครั้งเดียว — ไม่เห็นจุดคำนวณย่อยระหว่างทาง</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+      <h3>2 เครื่องมือหลักในการวิเคราะห์งบกำไรขาดทุน</h3>
+      <ul style="margin:0">
+        <li><b><Term id="commonSizeAnalysis">Common-size Analysis</Term></b> (การวิเคราะห์ย่อส่วนตามแนวดิ่ง) — คำนวณทุกรายการเป็น % ของยอดขาย ทำให้เปรียบเทียบบริษัทขนาดต่างกันหรือบริษัทในอุตสาหกรรมเดียวกันได้</li>
+        <li><b><Term id="trendAnalysis">Trend Analysis</Term></b> (การวิเคราะห์แนวโน้ม) — ดูการเปลี่ยนแปลงของแต่ละรายการข้ามหลายงวด</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M4 20 L10 8 L15 15 L22 4" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h2>จากยอดขายสุทธิ ไปจนถึงกำไรสุทธิ — ทีละขั้น</h2>
+    </div>
+    <p class="sec-sub">งบกำไรขาดทุนแบบ Multiple-step คำนวณเป็นลำดับขั้น — แต่ละขั้นมีความหมายในการวิเคราะห์ของตัวเอง</p>
+
+    <div class="figwrap">
+      <figure>
+        <svg viewBox="0 0 760 200" role="img" aria-label="ลำดับการคำนวณงบกำไรขาดทุนแบบหลายขั้น เริ่มจากยอดขายสุทธิ ลบต้นทุนขาย เท่ากับกำไรขั้นต้น ลบค่าใช้จ่ายขายและบริหาร เท่ากับกำไรก่อนดอกเบี้ยและภาษี หรือ EBIT ลบดอกเบี้ยจ่าย เท่ากับกำไรก่อนภาษี หรือ EBT ลบภาษีจ่าย เท่ากับกำไรสุทธิ">
+          <g font-family="var(--sans)">
+            <rect x="10" y="70" width="120" height="55" rx="8" fill="var(--slate-soft)" stroke="var(--slate)" stroke-width="1.8"/>
+            <text x="70" y="93" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">ยอดขายสุทธิ</text>
+            <text x="70" y="110" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">− ต้นทุนขาย</text>
+
+            <text x="145" y="102" font-size="14" fill="var(--ink-3)">→</text>
+
+            <rect x="160" y="70" width="120" height="55" rx="8" fill="var(--coral-soft)" stroke="var(--coral)" stroke-width="1.8"/>
+            <text x="220" y="93" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">กำไรขั้นต้น</text>
+            <text x="220" y="110" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">− ค่าขายและบริหาร</text>
+
+            <text x="295" y="102" font-size="14" fill="var(--ink-3)">→</text>
+
+            <rect x="310" y="70" width="120" height="55" rx="8" fill="var(--gold-soft)" stroke="var(--gold)" stroke-width="1.8"/>
+            <text x="370" y="93" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">EBIT</text>
+            <text x="370" y="110" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">− ดอกเบี้ยจ่าย</text>
+
+            <text x="445" y="102" font-size="14" fill="var(--ink-3)">→</text>
+
+            <rect x="460" y="70" width="120" height="55" rx="8" fill="var(--violet-soft)" stroke="var(--violet)" stroke-width="1.8"/>
+            <text x="520" y="93" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">EBT</text>
+            <text x="520" y="110" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">− ภาษีจ่าย</text>
+
+            <text x="595" y="102" font-size="14" fill="var(--ink-3)">→</text>
+
+            <rect x="610" y="70" width="140" height="55" rx="8" fill="var(--fwd-soft, var(--card))" stroke="var(--fwd)" stroke-width="2"/>
+            <text x="680" y="102" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fwd)">กำไรสุทธิ</text>
+          </g>
+        </svg>
+        <figcaption>EBIT (Earnings Before Interest and Taxes) และ EBT (Earnings Before Tax) คือจุดคำนวณย่อยที่ใช้วิเคราะห์ "การดำเนินงาน" แยกจาก "ผลของโครงสร้างเงินทุนและภาษี"</figcaption>
+      </figure>
+    </div>
+
+    <div class="tablewrap" style="margin-top:20px">
+      <table>
+        <caption>รายการหลักในงบกำไรขาดทุน — ความหมายทีละบรรทัด</caption>
+        <thead><tr><th scope="col">รายการ</th><th scope="col">คำนวณยังไง</th><th scope="col">ความหมาย</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><Term id="netSales">ยอดขายสุทธิ (Net Sales)</Term></th><td>ขาย − รับคืนสินค้า − ส่วนลดจ่าย</td><td>รายได้หลักของกิจการส่วนใหญ่</td></tr>
+          <tr><th scope="row"><Term id="cogs">ต้นทุนขาย (COGS)</Term></th><td>สินค้าคงเหลือต้นงวด + ซื้อสุทธิ − สินค้าคงเหลือปลายงวด</td><td>ค่าใช้จ่ายหลัก ขึ้นกับวิธีคำนวณสินค้าคงเหลือที่กิจการเลือกใช้</td></tr>
+          <tr><th scope="row"><Term id="grossProfit">กำไรขั้นต้น (Gross Profit)</Term></th><td>ยอดขายสุทธิ − ต้นทุนขาย</td><td>เครื่องมือสำคัญวิเคราะห์การดำเนินงาน</td></tr>
+          <tr><th scope="row">ค่าใช้จ่ายในการดำเนินงาน</th><td>ค่าเช่า, โฆษณา, เงินเดือนผู้บริหาร, ค่าเสื่อมราคา, ค่าตัดจำหน่าย ฯลฯ</td><td>ค่าใช้จ่ายประจำวันที่ไม่ใช่ต้นทุนขาย</td></tr>
+          <tr><th scope="row"><Term id="ebit">EBIT</Term></th><td>กำไรขั้นต้น − ค่าใช้จ่ายขายและบริหาร</td><td>= กำไรจากการดำเนินงาน (Operating Profit)</td></tr>
+          <tr><th scope="row"><Term id="ebt">EBT</Term></th><td>EBIT − ดอกเบี้ยจ่าย</td><td>ช่วยวิเคราะห์ต้นทุนเงินทุนฝั่งเจ้าหนี้</td></tr>
+          <tr><th scope="row"><Term id="netIncome">กำไรสุทธิ (Net Income)</Term></th><td>EBT − ภาษีจ่าย</td><td>ใช้คำนวณกำไรสุทธิต่อหุ้น (กรณีไม่มีหุ้นบุริมสิทธิ)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="exam" style="margin-top:20px">
+      <h4>อัตราการเติบโตของยอดขาย 2 แบบ <span class="tag">โน้ต</span></h4>
+      <p style="margin:0"><b>Nominal Sales Growth</b> — อัตราการเติบโตแบบตัวเงิน ไม่ปรับอะไรเลย · <b>Real Sales Growth</b> — ปรับด้วยอัตราเงินเฟ้อ (CPI) แล้ว ทำให้เห็นการเติบโตที่แท้จริงหลังหักผลของราคาที่สูงขึ้น — ถ้ายอดขายโต 5% แต่เงินเฟ้อ 5% เท่ากัน แปลว่ายอดขาย<b>จริง</b>ไม่ได้โตเลย</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PART 2 — BALANCE SHEET -->
+  <!-- ============================================================ -->
+  <section class="act-title" style="margin-top:60px">
+    <span style="display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--coral);font-weight:700;margin-bottom:6px">Part 2</span>
+    <h2 style="margin:0 0 8px;font-size:1.4rem;font-weight:800">งบฐานะการเงิน (Balance Sheet)</h2>
+    <p style="margin:0;color:var(--ink-2);max-width:72ch">บอกทรัพยากร (สินทรัพย์) และแหล่งที่มาของเงินทุน (หนี้สินและส่วนของเจ้าของ) ของกิจการ ณ<b>จุดเวลาหนึ่ง</b> — ให้ข้อมูลศักยภาพในการสร้างกำไรในอนาคตของสินทรัพย์ และสัญญาณกระแสเงินสดที่อาจมาจากลูกหนี้และสินค้าคงเหลือ</p>
+  </section>
+
+  <section>
+    <div class="exam">
+      <h4>ข้อจำกัดที่ต้องรู้ก่อนอ่านงบนี้ <span class="tag">โน้ต</span></h4>
+      <p style="margin:0">งบฐานะการเงินใช้<b><Term id="historicalCost">Historical Cost</Term></b> (ราคาทุนเดิม) แทนมูลค่ายุติธรรมในการวัดมูลค่าหลายรายการ (เช่น สินทรัพย์ถาวรบันทึกที่ราคาซื้อ) — นักวิเคราะห์อาจต้อง<b>ปรับปรุงเอง</b>เพื่อหามูลค่าสุทธิทางเศรษฐกิจ (economic net worth) ที่แท้จริงของกิจการ เช่น ตีมูลค่าสินทรัพย์ถาวรใหม่เป็นมูลค่าตลาด</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="knob">
+        <span class="where c1">ราคาที่ตกลง ณ วันเกิดรายการ</span>
+        <h3><Term id="historicalCost">Historical Value</Term></h3>
+        <p class="why" style="margin:0">ราคาที่ตกลงแลกเปลี่ยนสินทรัพย์หรือหนี้สิน ณ วันที่เกิดรายการ — ค่าคงที่ ไม่ขยับตามตลาด</p>
+      </div>
+      <div class="knob">
+        <span class="where c2">Exit Price ณ วันวัดมูลค่า</span>
+        <h3><Term id="fairValue">Fair Value</Term></h3>
+        <p class="why" style="margin:0">ราคาที่จะได้รับจากการขายสินทรัพย์ หรือจะจ่ายเพื่อโอนหนี้สิน ในรายการปกติระหว่างผู้ร่วมตลาด ณ วันที่วัดมูลค่า — ขยับตามสภาพตลาดจริง</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="3" y="8" width="8" height="12" rx="1.5" fill="none" stroke="var(--slate)" stroke-width="1.8"/>
+        <rect x="15" y="4" width="8" height="16" rx="1.5" fill="none" stroke="var(--slate)" stroke-width="1.8"/>
+      </svg>
+      <h2>สินทรัพย์ (Assets) — หมุนเวียน vs ถาวร</h2>
+    </div>
+    <p class="sec-sub">ทรัพยากรที่กิจการมีไว้หาผลประโยชน์ทั้งปัจจุบันและอนาคต — ได้มาจากการซื้อ (ลงทุน) จากการดำเนินงาน หรือจากการจัดหาเงิน (เช่น ออกหนี้)</p>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3><Term id="currentAssets">Current Assets</Term></h3>
+        <p style="color:var(--ink-2);margin:0 0 8px">เงินสดหรือสินทรัพย์ที่เปลี่ยนเป็นเงินสดได้ภายใน 1 รอบดำเนินธุรกิจหรือ 1 ปี</p>
+        <ul style="margin:0;font-size:.88rem">
+          <li>เงินสด</li>
+          <li>หลักทรัพย์ในความต้องการของตลาด</li>
+          <li>ลูกหนี้การค้า</li>
+          <li>สินค้าคงเหลือ</li>
+          <li>ค่าใช้จ่ายจ่ายล่วงหน้า</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><Term id="fixedAssets">Fixed Assets</Term></h3>
+        <p style="color:var(--ink-2);margin:0 0 8px">สินทรัพย์มีตัวตน อายุการใช้งานเกิน 1 ปี — แสดงด้วย<b>มูลค่าตามบัญชี</b></p>
+        <pre style="font-size:.78rem;background:var(--paper-2);padding:8px 10px;border-radius:6px;margin:0">ราคาทุน              XXX
+หัก ค่าเสื่อมสะสม     (XXX)
+สินทรัพย์ถาวรสุทธิ    XXX</pre>
+      </div>
+      <div class="card">
+        <h3>Other Assets</h3>
+        <p style="color:var(--ink-2);margin:0">สินทรัพย์ที่ไม่เข้าทั้งสองกลุ่มข้างต้น เช่น สิทธิบัตร ลิขสิทธิ์ ค่าความนิยม</p>
+      </div>
+    </div>
+
+    <div class="knob" style="margin-top:20px">
+      <span class="where c1">2 วิธีคำนวณ</span>
+      <h3><Term id="depreciation">Depreciation</Term> — ค่าเสื่อมราคา</h3>
+      <p class="why">ค่าใช้จ่ายที่ตัดจากมูลค่าสินทรัพย์ตามการใช้ประโยชน์ในแต่ละงวด</p>
+      <pre>วิธีเส้นตรง (Straight-line):
+ค่าเสื่อมราคา (ต่อปี) = (ราคาทุน − มูลค่าซาก) / อายุการใช้งาน
+
+วิธีอัตราเร่ง (Double Declining Balance):
+ค่าเสื่อมราคา (ต่อปี) = (ราคาทุน − ค่าเสื่อมสะสม) × 2 × (1 / อายุการใช้งาน)</pre>
+      <p class="why" style="margin:0">วิธีอัตราเร่งใช้ <b>2 เท่า</b>ของอัตราเส้นตรง คูณกับ<b>ราคาตามบัญชี ณ ต้นงวด</b> (ไม่ใช่ราคาทุนคงที่เหมือนวิธีเส้นตรง) — ทำให้ตัดค่าเสื่อมเยอะช่วงต้นแล้วค่อยๆ ลดลง</p>
+    </div>
+
+    <div class="exam" style="margin-top:20px">
+      <h4>โจทย์ตัวอย่าง — บริษัท ABC ซื้อเครื่องจักร <span class="tag">คำนวณ</span></h4>
+      <p><b>โจทย์:</b> ซื้อเครื่องจักรราคา 100,000 บาท อายุการใช้งานคาด 4 ปี มูลค่าซาก 0 บาท หาค่าเสื่อมราคาปีที่ 1 ด้วยทั้งสองวิธี</p>
+      <div class="grid-2">
+        <div>
+          <p style="margin:0 0 6px;font-weight:700;color:var(--ink)">วิธีเส้นตรง</p>
+          <p style="font-family:var(--mono);font-size:.82rem;background:var(--ink);color:var(--paper);padding:9px 11px;border-radius:8px;margin:0 0 8px">(100,000 − 0) / 4 = <b>25,000 บาท/ปี</b></p>
+          <p style="font-size:.85rem;color:var(--ink-2);margin:0">งบฐานะการเงิน: เครื่องจักร 100,000 − ค่าเสื่อมสะสม (25,000) = สุทธิ <b>75,000</b><br/>งบกำไรขาดทุน: ค่าเสื่อมราคา = <b>25,000</b></p>
+        </div>
+        <div>
+          <p style="margin:0 0 6px;font-weight:700;color:var(--ink)">วิธีอัตราเร่ง</p>
+          <p style="font-family:var(--mono);font-size:.82rem;background:var(--ink);color:var(--paper);padding:9px 11px;border-radius:8px;margin:0 0 8px">(100,000 − 0) × 2 × (1/4) = <b>50,000 บาท/ปี</b></p>
+          <p style="font-size:.85rem;color:var(--ink-2);margin:0">งบฐานะการเงิน: เครื่องจักร 100,000 − ค่าเสื่อมสะสม (50,000) = สุทธิ <b>50,000</b><br/>งบกำไรขาดทุน: ค่าเสื่อมราคา = <b>50,000</b></p>
+        </div>
+      </div>
+      <p style="margin:14px 0 0"><b>ข้อสังเกต:</b> ทรัพย์สินชิ้นเดียวกัน ปีเดียวกัน แต่วิธีคำนวณต่างกันให้ค่าเสื่อมต่างกัน<b>ถึง 2 เท่า</b> (25,000 vs 50,000) — วิธีที่กิจการเลือกใช้กระทบทั้งกำไรสุทธิและมูลค่าสินทรัพย์สุทธิที่แสดงในงบโดยตรง</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M4 20 L4 6 L20 6" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="4" cy="20" r="2" fill="var(--gold)"/><circle cx="20" cy="6" r="2" fill="var(--gold)"/>
+      </svg>
+      <h2>หนี้สิน (Liabilities) และส่วนของเจ้าของ</h2>
+    </div>
+    <p class="sec-sub">การได้มาซึ่งทรัพยากรผ่านการกู้ยืม — ผู้ให้กู้มีสิทธิเรียกร้องในทรัพยากรนั้นก่อนเจ้าของกิจการ</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3><Term id="currentLiabilities">Current Liabilities</Term></h3>
+        <p style="color:var(--ink-2);margin:0 0 8px">หนี้สินที่ต้องชำระภายใน 12 เดือน</p>
+        <ul style="margin:0;font-size:.88rem">
+          <li>เงินเบิกเกินบัญชี (O/D)</li>
+          <li>เจ้าหนี้การค้า</li>
+          <li>ตั๋วเงินจ่าย</li>
+          <li>ค่าใช้จ่ายค้างจ่าย</li>
+          <li>รายได้รับล่วงหน้า</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><Term id="longTermLiabilities">Long-Term Liabilities</Term></h3>
+        <p style="color:var(--ink-2);margin:0 0 8px">หนี้สินที่ครบกำหนดชำระเกินกว่า 1 ปี</p>
+        <ul style="margin:0;font-size:.88rem">
+          <li>เงินกู้ยืมระยะยาว</li>
+          <li>ตั๋วเงินจ่ายระยะยาว</li>
+          <li>หุ้นกู้ (Bond)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exam" style="margin-top:20px">
+      <h4>โจทย์ตัวอย่าง — ดอกเบี้ยค้างจ่ายจากตั๋วเงิน <span class="tag">คำนวณ</span></h4>
+      <p><b>โจทย์:</b> บริษัท AAA ออกตั๋วเงินเดือนกุมภาพันธ์ ดอกเบี้ยหน้าตั๋ว 15% ต่อปี จ่ายดอกเบี้ยทุก 3 เดือนเริ่มเดือนกุมภาพันธ์ มูลค่าหน้าตั๋ว 500,000 บาท — ปลายเดือนธันวาคม บริษัทมีค่าใช้จ่ายค้างจ่ายเท่าไหร่?</p>
+      <pre style="font-family:var(--mono);font-size:.82rem;background:var(--ink);color:var(--paper);padding:10px 12px;border-radius:8px;margin:8px 0">ดอกเบี้ย (ต่อปี)   = 500,000 × 0.15 = 75,000
+ดอกเบี้ย (ต่อเดือน) = 75,000 / 12    = 6,250
+ดอกเบี้ยค้างจ่าย ณ 31 ธ.ค. = 6,250 × 2 เดือน = 12,500 บาท</pre>
+      <p style="margin:0"><b>ทำไมคูณด้วย 2:</b> จ่ายดอกเบี้ยทุก 3 เดือนเริ่ม ก.พ. → รอบจ่ายคือ ก.พ., พ.ค., ส.ค., พ.ย. — หลังจ่ายรอบพฤศจิกายนแล้ว เดือน<b>พ.ย.-ธ.ค.</b>ยังไม่ถึงรอบจ่ายถัดไป (ก.พ. ปีหน้า) จึงมีแค่ 2 เดือนที่ต้องตั้งเป็นค้างจ่าย ณ สิ้นปี</p>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+      <h3><Term id="stockholdersEquity">Stockholders' Equity</Term></h3>
+      <p style="color:var(--ink-2);margin:0">ทุนที่เจ้าของนำมาลงทุน (เงินสดหรือสินทรัพย์อื่น) รวมกำไรสุทธิที่ยังไม่ได้แบ่ง — ประกอบด้วย: หุ้นบุริมสิทธิ์ (Preferred Stock), หุ้นทุนซื้อคืน (Treasury Stock — มักซื้อคืนเมื่อราคาหุ้น undervalue), หุ้นสามัญ (Common Stock ที่ Par Value), ส่วนเกินมูลค่าหุ้น (Paid-in Capital), กำไรสะสม (Retained Earnings)</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <circle cx="13" cy="13" r="10" fill="none" stroke="var(--violet)" stroke-width="1.8"/>
+        <path d="M8 13 L11 16 L18 9" stroke="var(--violet)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <h2>อัตราส่วนจากงบฐานะการเงิน</h2>
+    </div>
+    <p class="sec-sub">แบ่งเป็น 2 กลุ่ม: <b>สภาพคล่อง</b> (จ่ายหนี้ระยะสั้นไหวไหม) และ <b>ความสามารถชำระหนี้</b> (โครงสร้างเงินทุนพึ่งหนี้มากแค่ไหน)</p>
+
+    <div class="grid-2">
+      <div class="tablewrap">
+        <table>
+          <caption><Term id="liquidityRatios">Liquidity Ratios</Term> — ยิ่งสูงยิ่งคล่องตัว</caption>
+          <thead><tr><th scope="col">อัตราส่วน</th><th scope="col">สูตร</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Current Ratio</th><td>Current Assets / Current Liabilities <span style="color:var(--ink-3)">(ควร &gt; 1)</span></td></tr>
+            <tr><th scope="row">Quick Ratio</th><td>(Cash + หลักทรัพย์ + ลูกหนี้) / CL<br/><span style="color:var(--ink-3)">= (CA − สินค้าคงเหลือ) / CL</span></td></tr>
+            <tr><th scope="row">Cash Ratio</th><td>(Cash + หลักทรัพย์) / CL <span style="color:var(--ink-3)">(เข้มข้นสุด)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <caption><Term id="solvencyRatios">Solvency Ratios</Term> — ความสามารถชำระหนี้</caption>
+          <thead><tr><th scope="col">อัตราส่วน</th><th scope="col">สูตร</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Long-term Debt to Equity</th><td>Total LT Debt / Total Equity</td></tr>
+            <tr><th scope="row">Debt to Equity</th><td>Total Debt / Total Equity</td></tr>
+            <tr><th scope="row">Total Debt to Total Assets</th><td>Total Debt / Total Assets</td></tr>
+            <tr><th scope="row"><Term id="financialLeverage">Financial Leverage</Term></th><td>Total Assets / Total Equity</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="exam" style="margin-top:20px">
+      <h4>Quick Ratio ตัดสินค้าคงเหลือออกทำไม <span class="tag">โน้ต</span></h4>
+      <p style="margin:0">สินค้าคงเหลือเป็นสินทรัพย์หมุนเวียนที่<b>เปลี่ยนเป็นเงินสดช้าที่สุด</b>และไม่แน่นอนที่สุด (ต้องขายได้ก่อน) — Quick Ratio (บางตำราเรียก Acid-test Ratio) จึงตัดออกเพื่อดูสภาพคล่องแบบเข้มงวดกว่า Current Ratio ส่วน Cash Ratio เข้มงวดที่สุดเพราะนับเฉพาะรายการที่เป็นเงินสดหรือใกล้เคียงเงินสดที่สุด</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PART 3 — CASH FLOW STATEMENT -->
+  <!-- ============================================================ -->
+  <section class="act-title" style="margin-top:60px">
+    <span style="display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--violet);font-weight:700;margin-bottom:6px">Part 3</span>
+    <h2 style="margin:0 0 8px;font-size:1.4rem;font-weight:800">งบกระแสเงินสด (Statement of Cash Flows)</h2>
+    <p style="margin:0;color:var(--ink-2);max-width:72ch">งบฐานะการเงินรายงานตัวเลข ณ<b>จุดเวลาหนึ่ง</b> — งบกระแสเงินสดรายงาน<b>การเปลี่ยนแปลง</b>ของงบฐานะการเงินระหว่างงวด และคือคำตอบว่า "กำไรสุทธิเป็นบวก แต่ทำไมไม่มีเงินจ่ายเงินเดือน" ได้ยังไง</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M4 4 L22 22 M22 4 L4 22" stroke="var(--blk)" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <h2>ทำไม "กำไรสุทธิ" ไม่ใช่ "เงินสด"</h2>
+    </div>
+    <p class="sec-sub">ตัวอย่างจากสไลด์ (ปรับจาก Fraser and Ormiston, 2016) — บริษัทกำไรโตต่อเนื่อง 3 ปีติด แต่กำลังเดินเข้าสู่วิกฤต</p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>กำไรสุทธิเพิ่มขึ้นทุกปี แต่กระแสเงินสดดำเนินงานติดลบหนักขึ้นเรื่อย ๆ</caption>
+        <thead><tr><th scope="col">รายการ</th><th scope="col">20X1</th><th scope="col">20X2</th><th scope="col">20X3</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">กำไรสุทธิ</th><td>100</td><td>130</td><td>135</td></tr>
+          <tr><th scope="row">กระแสเงินสดดำเนินงาน</th><td style="color:var(--blk)">(380)</td><td style="color:var(--blk)">(1,180)</td><td style="color:var(--blk)">(1,500)</td></tr>
+          <tr><th scope="row">กระแสเงินสดลงทุน</th><td>(15)</td><td>(25)</td><td>(55)</td></tr>
+          <tr><th scope="row">กระแสเงินสดจัดหาเงินทุน</th><td>370</td><td>1,240</td><td>1,600</td></tr>
+          <tr><th scope="row">การออกหนี้ใหม่</th><td>720</td><td>1,700</td><td>2,950</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="exam" style="margin-top:20px">
+      <h4>อ่านสัญญาณอันตรายจากตารางนี้ <span class="tag">ออกสอบ</span></h4>
+      <p><b>ลำดับเหตุการณ์ที่ต้องอ่านให้ออก:</b> กำไรสุทธิเพิ่มขึ้น → แต่กระแสเงินสดดำเนินงานติดลบ (และติดลบหนักขึ้นทุกปี) → กิจการต้อง<b>กู้ยืมเพื่อชดเชย</b>กระแสเงินสดที่มีปัญหา (สังเกตว่าการออกหนี้ใหม่โตเร็วกว่ากำไรสุทธิมาก) → นำไปสู่การขาดสภาพคล่องและความสามารถชำระหนี้ที่ลดลง → ความเสี่ยง<b>ล้มละลาย</b></p>
+      <p style="margin:0"><b>บทเรียน:</b> กำไรสุทธิเป็นบวกไม่ได้แปลว่ากิจการมีเงินสดพอจ่ายค่าวัตถุดิบ เงินเดือน ค่าเช่า ค่าน้ำค่าไฟ หรือคืนเงินกู้ — <b>กำไรสุทธิไม่ใช่เงินสด</b> นี่คือเหตุผลที่งบกระแสเงินสดสำคัญ: มันรายงานเฉพาะรายการที่เป็นเงินสดเข้า-ออกจริงเท่านั้น</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M4 13 L11 13 M15 13 L22 13" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M11 9 L15 13 L11 17" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h2>3 แหล่งของกระแสเงินสด</h2>
+    </div>
+    <p class="sec-sub">งบฐานะการเงินรายงานตัวเลข ณ จุดใดจุดหนึ่ง — งบกระแสเงินสดรายงาน<b>การเปลี่ยนแปลง</b>ของงบฐานะการเงินระหว่างงวด แยกตามแหล่งที่มา-ใช้ไป 3 กลุ่ม</p>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>Operating Activities</h3>
+        <p style="color:var(--ink-2);margin:0;font-size:.9rem">กระแสเงินสดจากกิจกรรมหลักที่สร้างรายได้ เช่น กำไรสุทธิ ค่าเสื่อมราคา การเปลี่ยนแปลงสินทรัพย์/หนี้สินหมุนเวียน — เกิดขึ้น<b>ภายใน</b>กิจการ</p>
+      </div>
+      <div class="card">
+        <h3>Investing Activities</h3>
+        <p style="color:var(--ink-2);margin:0;font-size:.9rem">กิจกรรมลงทุนในสินทรัพย์<b>ระยะยาว</b> เช่น ซื้อ-ขายสินทรัพย์ถาวร — เกิดขึ้น<b>ภายนอก</b>กิจการ</p>
+      </div>
+      <div class="card">
+        <h3>Financing Activities</h3>
+        <p style="color:var(--ink-2);margin:0;font-size:.9rem">การเปลี่ยนแปลงของ<b>หนี้สินระยะยาวและส่วนของเจ้าของ</b> — กู้/คืนเงิน, ออก/ไถ่ถอนหุ้นกู้, ออก/ซื้อคืนหุ้นสามัญ, จ่ายปันผล — เกิดขึ้น<b>ภายนอก</b>กิจการ</p>
+      </div>
+    </div>
+
+    <div class="tablewrap" style="margin-top:20px">
+      <table>
+        <caption>เงินสดเข้า vs เงินสดออก — กฎการอ่านทิศทาง</caption>
+        <thead><tr><th scope="col">กระแสเงินสดเข้า</th><th scope="col">กระแสเงินสดออก</th></tr></thead>
+        <tbody>
+          <tr><td>สินทรัพย์<b>ลดลง</b></td><td>สินทรัพย์<b>เพิ่มขึ้น</b></td></tr>
+          <tr><td>หนี้สิน<b>เพิ่มขึ้น</b></td><td>หนี้สิน<b>ลดลง</b></td></tr>
+          <tr><td>ส่วนของเจ้าของ<b>เพิ่มขึ้น</b></td><td>ส่วนของเจ้าของ<b>ลดลง</b> (เช่น ซื้อหุ้นคืน)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="knob" style="margin-top:20px">
+      <span class="where c1">วิธีทางอ้อม (นิยมกว่า)</span>
+      <h3>โครงร่างงบกระแสเงินสดจากดำเนินงาน</h3>
+      <pre>กระแสเงินสดจากกิจกรรมดำเนินงาน
+  กำไรสุทธิ                                XX
+  รายการปรับปรุง
+    ค่าเสื่อมราคา                          XX
+    สินทรัพย์หมุนเวียนลดลง(เพิ่มขึ้น)        XX
+    หนี้สินหมุนเวียนเพิ่มขึ้น(ลดลง)          XX
+  เงินสดสุทธิจากกิจกรรมการดำเนินงาน          XX</pre>
+      <p class="why" style="margin:0">เริ่มจากกำไรสุทธิ (ตัวเลขทางบัญชี) แล้ว "ปรับ" ให้กลายเป็นตัวเลขเงินสดจริง — ตรงกับกฎเงินสดเข้า/ออกในตารางด้านบน</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <circle cx="13" cy="13" r="10" fill="none" stroke="var(--gold)" stroke-width="1.8"/>
+        <path d="M13 7 L13 13 L17 16" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      </svg>
+      <h2>วิเคราะห์งบกระแสเงินสด — กรอบ 4 ขั้นตอน</h2>
+    </div>
+    <p class="sec-sub">การดำเนินงานต่อไปในอนาคตของบริษัทขึ้นอยู่กับความสามารถผลิตเงินสดจากการดำเนินงาน — กิจการต้องมีเงินจ่ายหนี้และจ่ายผลตอบแทนผู้ถือหุ้น</p>
+
+    <div class="cascade">
+      <div class="rung">
+        <span class="step-n">1</span>
+        <h4>แหล่งที่มา-ใช้ไปหลัก</h4>
+        <p class="what">แหล่งเงินสดหลักคืออะไร ใช้ไปทางไหนหลัก ๆ — กระแสเงินสดดำเนินงานเป็นบวกและพอคลุม capital expenditure ไหม</p>
+      </div>
+      <div class="rung">
+        <span class="step-n">2</span>
+        <h4>ตัวกำหนด CFO</h4>
+        <p class="what">อะไรคือปัจจัยหลักที่กำหนดกระแสเงินสดดำเนินงาน — CFO สูงหรือต่ำกว่ากำไรสุทธิ เพราะอะไร</p>
+      </div>
+      <div class="rung">
+        <span class="step-n">3</span>
+        <h4>การลงทุนเพื่ออนาคต</h4>
+        <p class="what">ลงทุนใน PP&amp;E ไปเท่าไหร่ เงินที่ใช้ลงทุนมาจากไหน</p>
+      </div>
+      <div class="rung">
+        <span class="step-n">4</span>
+        <h4>ธรรมชาติของเงินทุน</h4>
+        <p class="what">แต่ละบรรทัดบอกว่ากำลังระดมทุนหรือคืนทุน ถ้ากู้ทุกปี ต้องคิดว่าต้องคืนเมื่อไหร่</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="3" y="3" width="20" height="20" rx="4" fill="none" stroke="var(--slate)" stroke-width="1.8"/>
+        <line x1="8" y1="9" x2="18" y2="9" stroke="var(--slate)" stroke-width="1.8"/>
+        <line x1="8" y1="14" x2="18" y2="14" stroke="var(--slate)" stroke-width="1.8"/>
+      </svg>
+      <h2><Term id="commonSizeCF">Common-size Analysis</Term> ของงบกระแสเงินสด</h2>
+    </div>
+    <p class="sec-sub">2 วิธีคำนวณ: <b>% ของกระแสเงินสดเข้า(ออก)รวม</b> หรือ <b>% ของรายได้สุทธิ</b> (เศษ = รายการ ÷ ยอดขาย)</p>
+
+    <div class="grid-2">
+      <div class="tablewrap">
+        <table>
+          <caption>Panel A — วิธีทางตรง: กระแสเงินสดเข้า</caption>
+          <thead><tr><th scope="col">รายการ</th><th scope="col">จำนวน</th><th scope="col">% รวม</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">รับจากลูกค้า</th><td>$23,543</td><td>96.86%</td></tr>
+            <tr><th scope="row">ขายอุปกรณ์</th><td>762</td><td>3.14%</td></tr>
+            <tr><th scope="row"><b>รวม</b></th><td><b>$24,305</b></td><td><b>100%</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <caption>Panel A — วิธีทางตรง: กระแสเงินสดออก</caption>
+          <thead><tr><th scope="col">รายการ</th><th scope="col">จำนวน</th><th scope="col">% รวม</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">จ่ายซัพพลายเออร์</th><td>$11,900</td><td>48.66%</td></tr>
+            <tr><th scope="row">จ่ายพนักงาน</th><td>4,113</td><td>16.82%</td></tr>
+            <tr><th scope="row">ค่าใช้จ่ายดำเนินงานอื่น</th><td>3,532</td><td>14.44%</td></tr>
+            <tr><th scope="row">ดอกเบี้ยจ่าย</th><td>258</td><td>1.05%</td></tr>
+            <tr><th scope="row">ภาษีจ่าย</th><td>1,134</td><td>4.64%</td></tr>
+            <tr><th scope="row">ซื้ออุปกรณ์</th><td>1,300</td><td>5.32%</td></tr>
+            <tr><th scope="row">อื่น ๆ</th><td>2,220</td><td>9.07%</td></tr>
+            <tr><th scope="row"><b>รวม</b></th><td><b>$24,457</b></td><td><b>100%</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tablewrap" style="margin-top:20px">
+      <table>
+        <caption>% ของรายได้สุทธิ (Net Revenue) — เห็นทุกบรรทัดเทียบกับยอดขายพร้อมกัน</caption>
+        <thead><tr><th scope="col">รายการ</th><th scope="col">จำนวน</th><th scope="col">% ของรายได้สุทธิ</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">กำไรสุทธิ</th><td>$2,210</td><td>9.37%</td></tr>
+          <tr><th scope="row">ค่าเสื่อมราคา</th><td>1,052</td><td>4.46%</td></tr>
+          <tr><th scope="row">กำไรจากขายอุปกรณ์</th><td>(205)</td><td>(0.87%)</td></tr>
+          <tr><th scope="row">ลูกหนี้เพิ่มขึ้น</th><td>(55)</td><td>(0.23%)</td></tr>
+          <tr><th scope="row">สินค้าคงเหลือเพิ่มขึ้น</th><td>(707)</td><td>(3.00%)</td></tr>
+          <tr><th scope="row">เจ้าหนี้เพิ่มขึ้น</th><td>263</td><td>1.11%</td></tr>
+          <tr><th scope="row"><b>เงินสดสุทธิจากดำเนินงาน</b></th><td><b>2,606</b></td><td><b>11.04%</b></td></tr>
+          <tr><th scope="row"><b>เงินสดสุทธิใช้ไปในการลงทุน</b></th><td><b>(538)</b></td><td><b>(2.28%)</b></td></tr>
+          <tr><th scope="row"><b>เงินสดสุทธิใช้ไปในการจัดหาเงิน</b></th><td><b>(2,220)</b></td><td><b>(9.41%)</b></td></tr>
+          <tr><th scope="row"><b>เงินสดลดลงสุทธิ</b></th><td><b>$(152)</b></td><td><b>(0.64%)</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:var(--ink-2);font-size:.85rem;margin-top:10px">ที่มา: Robinson et al. (2009) — ข้อดีของแบบ % รายได้สุทธิ: เปรียบเทียบรายการดำเนินงาน ลงทุน และจัดหาเงินได้บนฐานเดียวกันหมด (ยอดขาย) ไม่ต้องคำนวณแยก % รวมของแต่ละกลุ่มเหมือน Panel A</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M13 3 L16 10 L23 10 L17.5 14.5 L19.5 22 L13 17.5 L6.5 22 L8.5 14.5 L3 10 L10 10 Z" fill="none" stroke="var(--coral)" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      <h2>กระแสเงินสดอิสระ — FCFF และ FCFE</h2>
+    </div>
+    <p class="sec-sub"><b>FCFF</b> (Free Cash Flow to the Firm) คือเงินสดที่เหลือจ่ายคืน<b>นักลงทุนทุกคน</b> (เจ้าหนี้ + ผู้ถือหุ้นสามัญ + ผู้ถือหุ้นบุริมสิทธิ์) — <b>FCFE</b> (Free Cash Flow to Equity) คือส่วนที่เหลือสำหรับ<b>ผู้ถือหุ้นสามัญเท่านั้น</b></p>
+
+    <div class="grid-2">
+      <div class="knob">
+        <span class="where c1">จ่ายคืนนักลงทุนทุกคน</span>
+        <h3>FCFF — 2 สูตร</h3>
+        <pre>FCFF = NI + NCC + Int×(1 − Tax rate) − FCInv − WCInv
+
+FCFF = CFO + Int×(1 − Tax rate) − FCInv</pre>
+        <p class="why" style="margin:0">NI = กำไรสุทธิ · NCC = ค่าใช้จ่ายที่ไม่ใช่เงินสด (D&amp;A) · Int = ดอกเบี้ยจ่าย · FCInv = รายจ่ายลงทุน · WCInv = การเปลี่ยนแปลงเงินทุนหมุนเวียน · CFO = กระแสเงินสดดำเนินงาน</p>
+      </div>
+      <div class="knob">
+        <span class="where c2">จ่ายคืนผู้ถือหุ้นสามัญเท่านั้น</span>
+        <h3>FCFE</h3>
+        <pre>FCFE = CFO − FCInv + Net Borrowing − Net Debt Repayment</pre>
+        <p class="why" style="margin:0">ต่างจาก FCFF ตรงที่หัก<b>กระแสเงินสดที่เกี่ยวกับหนี้</b>เข้ามาด้วย (กู้เพิ่ม−คืนหนี้) เพราะ FCFE สนใจแค่ส่วนที่เหลือให้ผู้ถือหุ้นสามัญ หลังจ่ายภาระเจ้าหนี้ไปแล้ว</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="2" y="6" width="10" height="6" rx="1.5" fill="none" stroke="var(--fwd)" stroke-width="1.8"/>
+        <rect x="14" y="14" width="10" height="6" rx="1.5" fill="none" stroke="var(--fwd)" stroke-width="1.8"/>
+        <path d="M12 9 L18 9 L18 14" fill="none" stroke="var(--fwd)" stroke-width="1.5"/>
+      </svg>
+      <h2>อัตราส่วนจากกระแสเงินสด</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="tablewrap">
+        <table>
+          <caption>Performance Ratios</caption>
+          <tbody>
+            <tr><th scope="row">Cash flow to revenue</th><td>CFO / Net Revenue</td></tr>
+            <tr><th scope="row">Cash return on assets</th><td>CFO / Average TA</td></tr>
+            <tr><th scope="row">Cash return on equity</th><td>CFO / Average Equity</td></tr>
+            <tr><th scope="row">Cash to income</th><td>CFO / Operating Income</td></tr>
+            <tr><th scope="row">Cash flow per share</th><td>(CFO − Preferred Div.) / #Common Shares</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <caption>Coverage Ratios</caption>
+          <tbody>
+            <tr><th scope="row">Debt coverage</th><td>CFO / Total Debt</td></tr>
+            <tr><th scope="row">Interest coverage</th><td>(CFO + ดอกเบี้ยจ่าย + ภาษีจ่าย) / ดอกเบี้ยจ่าย</td></tr>
+            <tr><th scope="row">Reinvestment</th><td>CFO / เงินสดจ่ายซื้อสินทรัพย์ระยะยาว</td></tr>
+            <tr><th scope="row">Debt payment</th><td>CFO / เงินสดจ่ายคืนหนี้ระยะยาว</td></tr>
+            <tr><th scope="row">Dividend payment</th><td>CFO / เงินปันผลจ่าย</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+      <h3>หมายเหตุประกอบงบการเงิน</h3>
+      <p style="color:var(--ink-2);margin:0">แสดงข้อมูลเกี่ยวกับการจัดทำงบและนโยบายบัญชีที่เลือกใช้ เปิดเผยตามที่มาตรฐานบัญชีกำหนด และให้ข้อมูลเพิ่มเติมที่ไม่ปรากฏในตัวงบการเงินเอง — จุดที่นักวิเคราะห์มักมองข้ามแต่มีข้อมูลสำคัญซ่อนอยู่มาก (เชื่อมกับบทที่ 2: นโยบายบัญชี/ประมาณการที่สำคัญมักอยู่ตรงนี้)</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h3>สรุปบทที่ 4</h3>
+      <ul>
+        <li>งบกำไรขาดทุนแบบ Multiple-step ให้จุดคำนวณย่อย (กำไรขั้นต้น, EBIT, EBT) ที่ใช้วิเคราะห์ได้มากกว่าแบบ Single-step</li>
+        <li>งบฐานะการเงินใช้ historical cost เป็นหลัก จึงอาจต้องปรับปรุงเพื่อสะท้อนมูลค่าเศรษฐกิจจริง — ค่าเสื่อมราคาเลือกวิธีต่างกัน ให้กำไรและมูลค่าสินทรัพย์ต่างกันได้มาก</li>
+        <li>อัตราส่วนสภาพคล่อง (Current/Quick/Cash Ratio) กับความสามารถชำระหนี้ (Debt/Equity, Financial Leverage) วัดคนละมิติของความเสี่ยง</li>
+        <li>งบกระแสเงินสดสำคัญเพราะกำไรสุทธิไม่ใช่เงินสด — กำไรเป็นบวกพร้อมกับ CFO ติดลบต่อเนื่องคือสัญญาณอันตรายที่ต้องจับตา</li>
+        <li>FCFF จ่ายคืนนักลงทุนทุกคน ส่วน FCFE จ่ายคืนเฉพาะผู้ถือหุ้นสามัญ</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Financial Statement Analysis (BS923102) · บทที่ 4: Understanding Financial Statements · เรียบเรียงจากเอกสารประกอบการสอน — Asst Prof. Dr. Chamaiporn Kumpamool
+  </footer>
+
 </Layout>
