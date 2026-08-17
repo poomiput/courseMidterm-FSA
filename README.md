@@ -9,14 +9,15 @@
 
 จากโน้ตในเอกสาร CH5: **70 ข้อ · 4 ตัวเลือก · ใช้เครื่องคิดเลขได้ · อาจมีข้อสอบเป็นภาษาอังกฤษ**
 
-| บท | ชื่อบท | ไฟล์ต้นฉบับ |
-| --- | --- | --- |
-| 2 | Financial Reporting Mechanics | `CH 2 FSA 1.68_Student.pdf` / `.md` |
-| 3 | Financial Reporting Standards | `CH 3 FSA 1.69_Student.pdf` / `.md` |
-| 4 | Understanding Financial Statements | `CH 4 FSA 1.69_Students.pdf` / `.md` |
-| 5 | Financial Analysis Techniques | `CH 5 FSA 1.69_Student.pdf` / `.md` |
+| บท | ชื่อบท | สถานะ | ไฟล์ต้นฉบับ |
+| --- | --- | --- | --- |
+| 2 | Financial Reporting Mechanics | ✅ เสร็จ | `CH 2 FSA 1.68_Student.pdf` / `.md` |
+| 3 | Financial Reporting Standards | ✅ เสร็จ | `CH 3 FSA 1.69_Student.pdf` / `.md` |
+| 4 | Understanding Financial Statements | ✅ เสร็จ | `CH 4 FSA 1.69_Students.pdf` / `.md` |
+| 5 | Financial Analysis Techniques | ✅ เสร็จ | `CH 5 FSA 1.69_Student.pdf` / `.md` |
+| ★ | บทสวดขอให้สอบดี (แผ่นสรุปรวบยอด) | ✅ เสร็จ | สรุปจากบท 2-5 |
 
-เอกสารต้นฉบับอยู่ที่ `C:\Users\AxisKing\Downloads\FSA\`
+เอกสารต้นฉบับอยู่ที่ `C:\Users\AxisKing\Downloads\FSA\` — **บทที่ 1 ไม่มีไฟล์ต้นฉบับ** จึงไม่รวมอยู่ในไซต์นี้ (index redirect ไปที่ `/ch2` แทน)
 
 ## Design system
 

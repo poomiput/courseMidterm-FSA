@@ -1,12 +1,401 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ComingSoon from "../components/ComingSoon.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const chapters = [
+  { n: 2, slug: "ch2", t: "Financial Reporting Mechanics", m: "การจำแนกกิจกรรม · สมการบัญชี · Accruals" },
+  { n: 3, slug: "ch3", t: "Financial Reporting Standard", m: "กรอบ IFRS · IFRS vs GAAP vs TFRS" },
+  { n: 4, slug: "ch4", t: "Understanding Financial Statements", m: "3 งบ · ค่าเสื่อมราคา · อัตราส่วนพื้นฐาน" },
+  { n: 5, slug: "ch5", t: "Financial Analysis Techniques", m: "5 กลุ่มอัตราส่วน · DuPont Analysis" },
+];
 ---
-<Layout title="บทสวดขอให้สอบดี" description="บทสวดขอให้สอบดี พร้อมแผ่นสรุปรวบยอดก่อนเข้าห้องสอบ FSA">
-  <ComingSoon
-    n="★"
-    title="บทสวดขอให้สอบดี"
-    accent="var(--gold)"
-    blurb="หน้ารวบยอดก่อนเข้าห้องสอบ — จะทำหลังเนื้อหาบทที่ 1-5 เสร็จ เพราะต้องรีดเอาสิ่งที่ออกสอบบ่อยจากทุกบทมารวมกัน"
-  />
+<Layout title="บทสวดขอให้สอบดี" description="บทสวดขอให้สอบดี พร้อมแผ่นสรุปรวบยอด Midterm FSA — สมการบัญชี กรอบ IFRS อัตราส่วนทั้งหมด และ DuPont Analysis หน้าเดียวจบ">
+
+  <header class="masthead">
+    <p class="eyebrow" style="color:var(--gold)">Financial Statement Analysis · ก่อนเข้าห้องสอบ</p>
+    <h1>บทสวดขอให้สอบดี</h1>
+    <p class="deck">อ่านมาครบ 4 บทแล้ว เหลืออีกนิดเดียว — หน้านี้มีสองส่วน: <b>บทสวดตั้งสติ</b> สำหรับก่อนเข้าห้องสอบ และ <b>แผ่นสรุปรวบยอด</b> ที่รีดเอาสูตร กรอบแนวคิด และตัวเลขที่ออกสอบบ่อยที่สุดจากทั้ง 4 บทมาไว้หน้าเดียว อ่านรอบสุดท้ายได้ใน 10 นาที</p>
+    <div class="credit-bar">
+      <span>Midterm บทที่ 1-5</span><span>70 ข้อ 4 ตัวเลือก</span><span>ใช้เครื่องคิดเลขได้</span><span>อาจมีข้อสอบเป็น Eng</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="pray">
+      <p class="pray-label">ตั้งนะโม 3 จบ</p>
+      <p class="pray-text">นะโม ตัสสะ ภะคะวะโต<br/>อะระหะโต สัมมาสัมพุทธัสสะ</p>
+      <p class="pray-note">(ว่า 3 ครั้ง)</p>
+      <div class="pray-rule"></div>
+      <p class="pray-wish">ขอให้สติมาเต็ม สูตรที่ท่องมาผุดขึ้นมาตอนที่ต้องใช้<br/>อ่านโจทย์ครบทุกตัวเลข ไม่สับตัวเศษตัวส่วน<br/>คำนวณแม่นยำ ไม่รีบจนพลาด<br/>มือไม่สั่น ใจไม่ตก ทำได้เต็มที่ที่ทบทวนมา</p>
+      <p class="pray-foot">— ที่เหลือคือของจริงที่ทบทวนมาแล้ว เลื่อนลงไปดูอีกรอบ —</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M13 3 L16 10 L23 10 L17.5 14.5 L19.5 22 L13 17.5 L6.5 22 L8.5 14.5 L3 10 L10 10 Z" fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      <h2>สมการที่ต้องท่องขึ้นใจ — บทที่ 2</h2>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <tbody>
+          <tr><th scope="row">งบฐานะการเงิน</th><td><code>Assets = Liabilities + Owners' Equity</code></td></tr>
+          <tr><th scope="row">ส่วนของเจ้าของ</th><td><code>Owners' Equity = Contributed Capital + Retained Earnings</code></td></tr>
+          <tr><th scope="row">งบกำไรขาดทุน</th><td><code>Revenue − Expenses = Net Income</code></td></tr>
+          <tr><th scope="row">สะพานเชื่อม 2 งบ</th><td><code>Ending RE = Beginning RE + Net Income − Dividends</code></td></tr>
+          <tr><th scope="row">รวมทุกสมการ</th><td><code>Assets = Liabilities + Contributed Capital + Beginning RE + Revenue − Expenses − Dividends</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:var(--ink-2);font-size:.9rem;margin-top:10px">คาถาจำ: <b>"การเปลี่ยนแปลงฐานะการเงินระหว่างงวด = สาเหตุของการเปลี่ยนแปลงฐานะการเงินระหว่างงวด"</b> — งบกำไรขาดทุน งบส่วนของเจ้าของ และงบกระแสเงินสด คือคำอธิบายว่า "ทำไม" งบฐานะการเงินต้นงวดถึงกลายเป็นปลายงวด</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M4 13 L11 13 M15 13 L22 13" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M11 9 L15 13 L11 17" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h2>Accrual Matrix — จับคู่ให้ถูกทุกครั้ง</h2>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th scope="col"></th><th scope="col">เงินสดมาก่อนรับรู้บัญชี</th><th scope="col">เงินสดมาหลังรับรู้บัญชี</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">รายได้</th><td><b>Unearned (Deferred) Revenue</b><br/>รายได้รับล่วงหน้า → เป็นหนี้สิน</td><td><b>Unbilled (Accrued) Revenue</b><br/>รายได้ค้างรับ → เป็นสินทรัพย์</td></tr>
+          <tr><th scope="row">ค่าใช้จ่าย</th><td><b>Prepaid Expense</b><br/>ค่าใช้จ่ายจ่ายล่วงหน้า → เป็นสินทรัพย์</td><td><b>Accrued Expenses</b><br/>ค่าใช้จ่ายค้างจ่าย → เป็นหนี้สิน</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:var(--ink-2);font-size:.9rem;margin-top:10px">วิธีจำไม่ให้สลับ: <b>"จ่าย/รับเงินสดก่อน"</b> → ยังไม่ได้ส่งมอบของ/บริการ → บันทึกเป็น<b>สินทรัพย์หรือหนี้สิน</b>รอไว้ก่อน ยังไม่ใช่รายได้/ค่าใช้จ่ายจริง — <b>"บันทึกบัญชีก่อน เงินสดมาทีหลัง"</b> → เกิดรายการ<b>ค้าง</b> (accrued) ที่ต้องตามเก็บ/ตามจ่าย</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M13 3 L23 13 L13 23 L3 13 Z" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linejoin="round"/>
+      </svg>
+      <h2>กรอบแนวคิด IFRS ย่อทั้งหมดในตารางเดียว — บทที่ 3</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="tablewrap">
+        <table>
+          <caption>4 คุณลักษณะเชิงคุณภาพ + 5 ย่อยของ Reliability</caption>
+          <tbody>
+            <tr><th scope="row">Understandability</th><td>เข้าใจได้</td></tr>
+            <tr><th scope="row">Relevance</th><td>เกี่ยวข้องกับการตัดสินใจ</td></tr>
+            <tr><th scope="row">Reliability</th><td>เชื่อถือได้ (5 ย่อย ดูล่าง)</td></tr>
+            <tr><th scope="row">Comparability</th><td>เปรียบเทียบกันได้</td></tr>
+            <tr><td colspan="2" style="padding-top:14px;color:var(--ink-3);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em">5 องค์ประกอบย่อยของ Reliability</td></tr>
+            <tr><th scope="row">Faithful Representation</th><td>เป็นตัวแทนอันเที่ยงธรรม</td></tr>
+            <tr><th scope="row">Substance over Form</th><td>เนื้อหาสำคัญกว่ารูปแบบ</td></tr>
+            <tr><th scope="row">Neutrality</th><td>ความเป็นกลาง</td></tr>
+            <tr><th scope="row">Prudence</th><td>ความระมัดระวัง</td></tr>
+            <tr><th scope="row">Completeness</th><td>ความครบถ้วน</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <caption>ข้อจำกัด · สมมติฐาน · 5 ฐานการวัดมูลค่า</caption>
+          <tbody>
+            <tr><th scope="row">Constraints</th><td>Timeliness, Benefit vs Cost, Balance ระหว่างคุณลักษณะ</td></tr>
+            <tr><th scope="row">Assumptions</th><td>Accrual Basis, Going Concern</td></tr>
+            <tr><td colspan="2" style="padding-top:14px;color:var(--ink-3);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em">5 ฐานการวัดมูลค่า</td></tr>
+            <tr><th scope="row">Historical Cost</th><td>จ่ายไปเท่าไหร่ตอนซื้อ</td></tr>
+            <tr><th scope="row">Current Cost</th><td>วันนี้ต้องจ่ายเท่าไหร่ถ้าซื้อใหม่</td></tr>
+            <tr><th scope="row">Realizable Value</th><td>ขายวันนี้ได้เท่าไหร่</td></tr>
+            <tr><th scope="row">Present Value</th><td>มูลค่าปัจจุบันของผลตอบแทนอนาคต</td></tr>
+            <tr><th scope="row">Fair Value</th><td>แลกเปลี่ยนตามราคาตลาดวันนี้ (Exit Price)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:20px">
+      <div class="exam">
+        <h4>Standard-setter vs Regulator</h4>
+        <p style="margin:0"><b>IASB / FASB / สภาวิชาชีพบัญชี</b> = เขียนกฎ (private-sector)<br/><b>SEC / FSA</b> = บังคับใช้กฎ (ภาครัฐ)</p>
+      </div>
+      <div class="exam">
+        <h4>Principles vs Rules-based</h4>
+        <p style="margin:0"><b>IFRS</b> = Principles-based (ยืดหยุ่น)<br/><b>U.S. GAAP</b> = Rules-based (เจาะจง)<br/>TFRS อ้างอิงตาม IFRS</p>
+      </div>
+      <div class="exam">
+        <h4>3 คุณลักษณะกรอบที่ดี</h4>
+        <p style="margin:0">Transparency (โปร่งใส) · Comprehensiveness (ครบถ้วน) · Consistency (สม่ำเสมอ)</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M4 20 L10 8 L15 15 L22 4" fill="none" stroke="var(--slate)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h2>ทางเดินงบกำไรขาดทุน — บทที่ 4</h2>
+    </div>
+
+    <div class="knob">
+      <pre>ยอดขายสุทธิ
+  − ต้นทุนขาย (COGS)                    = กำไรขั้นต้น (Gross Profit)
+  − ค่าใช้จ่ายขายและบริหาร               = EBIT (กำไรจากการดำเนินงาน)
+  − ดอกเบี้ยจ่าย                          = EBT (กำไรก่อนภาษี)
+  − ภาษีจ่าย                             = กำไรสุทธิ (Net Income)</pre>
+      <p class="why" style="margin:0">ท่องเป็นตัวย่อ: <b>ขาย − ต้นทุน = ขั้นต้น − SG&amp;A = EBIT − ดอกเบี้ย = EBT − ภาษี = สุทธิ</b></p>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="knob">
+        <span class="where c1">ต่างกัน 2 เท่าพอดี</span>
+        <h3>ค่าเสื่อมราคา — 2 วิธี</h3>
+        <pre>Straight-line = (ราคาทุน − มูลค่าซาก) / อายุใช้งาน
+Double Declining = (ราคาทุน − ค่าเสื่อมสะสม) × 2 × (1/อายุใช้งาน)</pre>
+        <p class="why" style="margin:0">ตัวอย่างจำง่าย: เครื่องจักร 100,000 บาท อายุ 4 ปี มูลค่าซาก 0 → เส้นตรงได้ <b>25,000</b>/ปี อัตราเร่งได้ <b>50,000</b>/ปี (2 เท่าเป๊ะ)</p>
+      </div>
+      <div class="knob">
+        <span class="where c2">คูณด้วยจำนวนเดือนที่ค้าง</span>
+        <h3>ดอกเบี้ยค้างจ่าย</h3>
+        <pre>ดอกเบี้ยค้างจ่าย = มูลค่าหน้าตั๋ว × อัตราดอกเบี้ย/12 × จำนวนเดือนที่ค้าง</pre>
+        <p class="why" style="margin:0">นับจากรอบจ่ายดอกเบี้ยล่าสุดถึงวันปิดงวด — อย่าลืมเช็ครอบจ่ายจริง (ทุก 3/6/12 เดือน) ก่อนนับเดือน</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="3" y="3" width="20" height="20" rx="4" fill="none" stroke="var(--violet)" stroke-width="1.8"/>
+        <line x1="8" y1="9" x2="18" y2="9" stroke="var(--violet)" stroke-width="1.8"/>
+        <line x1="8" y1="14" x2="18" y2="14" stroke="var(--violet)" stroke-width="1.8"/>
+        <line x1="8" y1="19" x2="14" y2="19" stroke="var(--violet)" stroke-width="1.8"/>
+      </svg>
+      <h2>สูตรอัตราส่วนครบทุกกลุ่ม — บทที่ 4-5</h2>
+    </div>
+    <p class="sec-sub">ตารางเดียวรวมทุกอัตราส่วนที่เจอในสองบทสุดท้าย — เรียงตามกลุ่ม</p>
+
+    <div class="grid-2">
+      <div class="tablewrap">
+        <table>
+          <caption>Liquidity — ยิ่งสูงยิ่งคล่อง (แต่ไม่ควรสูงเกินไป)</caption>
+          <tbody>
+            <tr><th scope="row">Current Ratio</th><td>CA / CL</td></tr>
+            <tr><th scope="row">Quick Ratio</th><td>(CA − Inventory) / CL</td></tr>
+            <tr><th scope="row">Cash Ratio</th><td>(Cash + หลักทรัพย์) / CL</td></tr>
+            <tr><th scope="row">Defensive Interval</th><td>(Cash+หลักทรัพย์+ลูกหนี้) / (ค่าใช้จ่ายดำเนินงานเงินสด/365)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <caption>Solvency — โครงสร้างทุน + ความสามารถจ่ายหนี้</caption>
+          <tbody>
+            <tr><th scope="row">Debt-to-Assets</th><td>Total Debt / Total Assets</td></tr>
+            <tr><th scope="row">Debt-to-Equity</th><td>Total Debt / Total Equity</td></tr>
+            <tr><th scope="row">Financial Leverage</th><td>Avg TA / Avg Equity</td></tr>
+            <tr><th scope="row">Interest Coverage</th><td>EBIT / Interest Payments</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="tablewrap">
+        <table>
+          <caption>Profitability — ยิ่งสูงยิ่งดีทุกตัว</caption>
+          <tbody>
+            <tr><th scope="row">Gross Profit Margin</th><td>Gross Profit / Revenue</td></tr>
+            <tr><th scope="row">Operating Margin</th><td>EBIT / Revenue</td></tr>
+            <tr><th scope="row">Net Profit Margin</th><td>NI / Revenue</td></tr>
+            <tr><th scope="row">ROA</th><td>NI / Avg TA</td></tr>
+            <tr><th scope="row">ROE</th><td>NI / Avg Equity</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <caption>Activity — ประสิทธิภาพใช้สินทรัพย์</caption>
+          <tbody>
+            <tr><th scope="row">Inventory Turnover</th><td>COGS / Avg Inventory</td></tr>
+            <tr><th scope="row">Receivables Turnover</th><td>Revenue / Avg Receivables</td></tr>
+            <tr><th scope="row">DOH / DSO</th><td>365 / Turnover ตัวนั้น ๆ</td></tr>
+            <tr><th scope="row">Total Asset Turnover</th><td>Revenue / Avg TA</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tablewrap" style="margin-top:20px">
+      <table>
+        <caption>Valuation — P/X ทั้งหมดอ่านค่าแบบเดียวกัน</caption>
+        <thead><tr><th scope="col">อัตราส่วน</th><th scope="col">สูตร</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">P/E</th><td>Price / EPS</td></tr>
+          <tr><th scope="row">P/CF</th><td>Price / Cash Flow per Share</td></tr>
+          <tr><th scope="row">P/S</th><td>Price / Sales per Share</td></tr>
+          <tr><th scope="row">P/B</th><td>Price / Book Value per Share</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <circle cx="13" cy="13" r="10" fill="none" stroke="var(--coral)" stroke-width="1.8"/>
+        <circle cx="13" cy="13" r="4" fill="var(--coral-soft)" stroke="var(--coral)" stroke-width="1.5"/>
+      </svg>
+      <h2>DuPont 5 ทาง — ท่องให้ขึ้นใจ</h2>
+    </div>
+
+    <div class="knob">
+      <pre>ROE = Tax Burden × Interest Burden × EBIT Margin × Asset Turnover × Financial Leverage
+    = (NI/EBT) × (EBT/EBIT) × (EBIT/Rev) × (Rev/Avg TA) × (Avg TA/Avg E)</pre>
+      <p class="why" style="margin:0">คาถาไทย 5 คำ: <b>ภาระภาษี · ภาระดอกเบี้ย · มาร์จิ้น EBIT · หมุนสินทรัพย์ · ใช้หนี้หนุน</b> — สังเกตว่าตัวเศษของตัวหนึ่งจะไปตัดกับตัวส่วนของตัวถัดไปเสมอ (EBT ตัด, EBIT ตัด, Revenue ตัด, Avg TA ตัด) เหลือ NI/Avg(E) = ROE พอดี</p>
+    </div>
+
+    <div class="exam" style="margin-top:20px">
+      <h4>ทำไม DuPont ถึงออกสอบแน่ <span class="tag">ออกสอบ</span></h4>
+      <p style="margin:0">บริษัทสอง ROE เท่ากันได้จากเหตุผลตรงข้ามกันเลย — margin สูง/หมุนช้า (สินค้าหรู) vs margin ต่ำ/หมุนไว (ค้าปลีก) — โจทย์มักให้ตัวเลข 2 บริษัทมาเทียบแล้วถามว่าใครพึ่ง leverage มากกว่ากัน ต้องแยกให้ออกทีละตัวขับเคลื่อน อย่าเดาจาก ROE เฉย ๆ</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M4 4 L22 22 M22 4 L4 22" stroke="var(--blk)" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <h2>กระแสเงินสด — จุดที่ข้อสอบชอบหลอก</h2>
+    </div>
+
+    <div class="grid-2">
+      <div class="exam">
+        <h4>"กำไรสุทธิ" ≠ "เงินสด"</h4>
+        <p style="margin:0">ตัวอย่างคลาสสิก: กำไรสุทธิเพิ่มทุกปี แต่ CFO ติดลบหนักขึ้นเรื่อย ๆ แล้วต้องกู้เงินมาโปะ — สัญญาณล้มละลาย แม้กำไรจะดูดีตลอด <b>อ่าน CFO คู่กับกำไรสุทธิเสมอ</b> อย่าดูตัวเดียว</p>
+      </div>
+      <div class="exam">
+        <h4>3 แหล่ง + ทิศทางเงินสด</h4>
+        <p style="margin:0">Operating (ภายใน) · Investing (ภายนอก, สินทรัพย์ระยะยาว) · Financing (ภายนอก, หนี้ระยะยาว+ทุน) — สินทรัพย์เพิ่ม = เงินออก, หนี้สิน/ทุนเพิ่ม = เงินเข้า</p>
+      </div>
+    </div>
+
+    <div class="knob" style="margin-top:20px">
+      <pre>FCFF = CFO + Int×(1 − Tax rate) − FCInv        (จ่ายคืนนักลงทุนทุกคน)
+FCFE = CFO − FCInv + Net Borrowing − Net Debt Repayment   (เฉพาะผู้ถือหุ้นสามัญ)</pre>
+      <p class="why" style="margin:0">FCFF ไม่แตะรายการหนี้ (จ่ายก่อนแบ่งให้ใคร) — FCFE หักภาระหนี้ออกก่อนเพราะเหลือเท่าไหร่ค่อยเป็นของผู้ถือหุ้นสามัญ</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M13 3 L16 10 L23 10 L17.5 14.5 L19.5 22 L13 17.5 L6.5 22 L8.5 14.5 L3 10 L10 10 Z" fill="none" stroke="var(--blk)" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      <h2>กับดัก 8 ข้อที่ออกสอบบ่อยที่สุด</h2>
+    </div>
+
+    <div class="cascade">
+      <div class="rung"><b>1. Standard-setter ≠ Regulator</b> — IASB/FASB เขียนกฎ, SEC/FSA บังคับใช้ — คนละบทบาทกัน อย่าสลับ</div>
+      <div class="rung"><b>2. Historical Cost vs Fair Value</b> — งบฐานะการเงินใช้ historical cost เป็นหลัก นักวิเคราะห์ต้องปรับเองถ้าอยากได้มูลค่าตลาดจริง</div>
+      <div class="rung"><b>3. Quick Ratio ตัด Inventory</b> — เพราะเปลี่ยนเป็นเงินสดช้าและไม่แน่นอนที่สุดในบรรดาสินทรัพย์หมุนเวียน</div>
+      <div class="rung"><b>4. Current Ratio สูงไม่ใช่ดีเสมอไป</b> — อาจแปลว่าขายสินค้าไม่ออกหรือถือเงินสดเกินความจำเป็น ต้องดูองค์ประกอบ ไม่ใช่แค่ตัวเลข</div>
+      <div class="rung"><b>5. วิธีคำนวณค่าเสื่อมกระทบกำไรโดยตรง</b> — เครื่องจักรเดียวกัน ปีเดียวกัน เส้นตรงกับอัตราเร่งต่างกันได้ถึง 2 เท่า</div>
+      <div class="rung"><b>6. Accrual ต้องดูจังหวะเงินสด</b> — เงินสดมาก่อน = รายการรอ (unearned/prepaid) เงินสดมาหลัง = รายการค้าง (unbilled/accrued)</div>
+      <div class="rung"><b>7. P/E อ่านสวนทางกันได้ 2 มุม</b> — นักลงทุนอยากได้ต่ำ บริษัทอยากให้สูง (แปลว่าตลาดให้ราคาดี)</div>
+      <div class="rung"><b>8. ROE เท่ากัน ≠ กิจการเหมือนกัน</b> — ต้องแตก DuPont ดูว่ามาจาก margin, turnover หรือ leverage ก่อนสรุป</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M5 13 L11 19 L21 7" fill="none" stroke="var(--fwd)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h2>เช็คลิสต์ 4 บท — กดเข้าไปทวนได้เลย</h2>
+    </div>
+
+    <div class="chk">
+      {chapters.map((c) => (
+        <a class="chk-item" href={`${base}/${c.slug}`}>
+          <span class="chk-n">{c.n}</span>
+          <span class="chk-body">
+            <span class="chk-t">{c.t}</span>
+            <span class="chk-m">{c.m}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="pray pray-end">
+      <p class="pray-wish" style="margin:0">อ่านมาถึงตรงนี้ได้ แปลว่าเตรียมมาดีพอแล้ว<br/><b>หายใจลึก ๆ อ่านโจทย์ให้ครบ เช็คหน่วยกับเครื่องหมายให้ดี แล้วลุยเลย</b></p>
+      <p class="pray-foot" style="margin:14px 0 0">โชคดีนะ 🍀</p>
+    </div>
+  </section>
+
+  <footer>
+    Financial Statement Analysis (BS923102) · หน้ารวบยอดก่อนสอบ Midterm · สรุปจากบทที่ 2-5 ทั้งหมดในเว็บนี้ — เอกสารประกอบการสอน Asst Prof. Dr. Chamaiporn Kumpamool
+  </footer>
+
+  <style>
+    .pray{
+      background:var(--gold-soft);
+      border:1px solid var(--gold);
+      border-radius:14px;
+      padding:34px 28px;
+      text-align:center;
+    }
+    .pray-label{
+      font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--gold);font-weight:700;margin:0 0 16px;
+    }
+    .pray-text{
+      font-family:var(--serif);
+      font-size:1.5rem;line-height:1.9;
+      color:var(--ink);margin:0;
+    }
+    .pray-note{font-size:.82rem;color:var(--ink-3);margin:10px 0 0}
+    .pray-rule{
+      width:60px;height:1px;background:var(--gold);
+      margin:24px auto;opacity:.5;
+    }
+    .pray-wish{
+      font-size:1.02rem;line-height:2;color:var(--ink);margin:0;
+    }
+    .pray-foot{font-size:.85rem;color:var(--ink-3);margin:20px 0 0}
+    .pray-end{background:var(--slate-soft);border-color:var(--slate)}
+
+    .chk{
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+      gap:10px;
+    }
+    .chk-item{
+      display:flex;align-items:center;gap:12px;
+      text-decoration:none;
+      border:1px solid var(--rule-soft);border-radius:10px;
+      padding:12px 14px;background:var(--card);
+      transition:border-color .15s, transform .15s;
+    }
+    .chk-item:hover{border-color:var(--coral);transform:translateY(-1px)}
+    .chk-n{
+      font-family:var(--mono);font-size:1.05rem;font-weight:700;
+      color:var(--coral);width:24px;flex:none;text-align:right;
+    }
+    .chk-body{display:flex;flex-direction:column;gap:2px;min-width:0}
+    .chk-t{font-size:.92rem;color:var(--ink);font-weight:700;line-height:1.25}
+    .chk-m{font-size:.72rem;color:var(--ink-3)}
+
+    @media (max-width:640px){
+      .pray{padding:26px 18px}
+      .pray-text{font-size:1.2rem}
+    }
+  </style>
+
 </Layout>
