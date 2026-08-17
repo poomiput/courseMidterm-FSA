@@ -1,7 +1,339 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ComingSoon from "../components/ComingSoon.astro";
+import Term from "../components/Term.astro";
 ---
-<Layout title="Financial Reporting Standards" description="บทที่ 3 — มาตรฐานการรายงานทางการเงิน — กรอบแนวคิดของ IFRS, การเทียบกับ U.S. GAAP และ TFRS ของไทย">
-  <ComingSoon n={3} title="Financial Reporting Standards" accent="var(--slate)" blurb="มาตรฐานการรายงานทางการเงิน — กรอบแนวคิดของ IFRS, การเทียบกับ U.S. GAAP และ TFRS ของไทย" />
+<Layout title="Financial Reporting Standard" description="บทที่ 3 — มาตรฐานการรายงานทางการเงิน: กรอบแนวคิด IFRS, การเทียบกับ U.S. GAAP, TFRS ของไทย และคุณลักษณะของกรอบการรายงานที่ดี">
+
+  <header class="masthead">
+    <p class="eyebrow" style="color:var(--slate)">Financial Statement Analysis · บทที่ 3</p>
+    <h1>Financial Reporting Standard</h1>
+    <p class="deck">บทที่ 2 แกะกลไกว่าธุรกรรมกลายเป็นตัวเลขในงบได้ยังไง — บทนี้ถอยออกมาดูภาพใหญ่กว่านั้น: <b>ใครเป็นคนกำหนดกฎ</b>ว่าต้องบันทึกแบบไหน และกรอบแนวคิดเบื้องหลังมาตรฐานเหล่านั้นคืออะไร</p>
+    <div class="credit-bar">
+      <span>IASB / FASB</span><span>IFRS vs U.S. GAAP</span><span>TFRS</span><span>Principles vs Rules-based</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="grid-2">
+      <div class="card">
+        <h3>เชื่อมจากที่รู้แล้ว</h3>
+        <ul>
+          <li>จากบทที่ 2 เรารู้แล้วว่างบการเงินคือผลลัพธ์ของกระบวนการบันทึกธุรกรรม และสมการบัญชี (A = L + E) เชื่อมทุกงบเข้าด้วยกัน</li>
+          <li>สิ่งที่ยังไม่เคยพูดถึง: กระบวนการบันทึกที่ "ถูกต้อง" คืออะไร ใครเป็นคนตัดสิน และทำไมบริษัทในประเทศต่าง ๆ ถึงรายงานตัวเลขแตกต่างกันได้แม้จะทำธุรกิจแบบเดียวกัน</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>สิ่งที่บทนี้ครอบคลุม</h3>
+        <ul>
+          <li><b>วัตถุประสงค์ของการรายงานทางการเงิน</b></li>
+          <li><b>หน่วยงานกำหนดมาตรฐาน</b> vs <b>หน่วยงานกำกับดูแล</b> — คนละบทบาทกัน</li>
+          <li><b>กรอบแนวคิด IFRS</b> — คุณลักษณะเชิงคุณภาพ ข้อจำกัด และสมมติฐาน</li>
+          <li><b>IFRS vs U.S. GAAP vs TFRS</b></li>
+          <li><b>คุณลักษณะของกรอบการรายงานที่มีประสิทธิภาพ</b></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <circle cx="13" cy="13" r="10" fill="none" stroke="var(--slate)" stroke-width="1.8"/>
+        <path d="M13 8 L13 13 L17 15" stroke="var(--slate)" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      </svg>
+      <h2>วัตถุประสงค์ของการรายงานทางการเงิน</h2>
+    </div>
+    <p class="sec-sub">มาตรฐานการรายงานทางการเงินเป็นตัวกำหนดว่าข้อมูล<b>ประเภทไหนและจำนวนเท่าไหร่</b>ที่ต้องเปิดเผยให้นักลงทุนและเจ้าหนี้ เพื่อให้ตัดสินใจได้อย่างมีข้อมูลรองรับ</p>
+
+    <div class="card">
+      <h3>นิยามจาก IASB</h3>
+      <p style="color:var(--ink-2);font-style:italic;margin:0 0 10px">"The objective of financial statements is to provide information about the financial position, performance, and changes in financial position of an entity; this information should be useful to a wide range of users for the purpose of making economic decisions"</p>
+      <p style="color:var(--ink-2);margin:0">รายงานทางการเงินมีไว้ให้ข้อมูลกับผู้ใช้<b>หลากหลายกลุ่ม</b> — นักลงทุน เจ้าหนี้ พนักงาน ลูกค้า และผู้มีส่วนได้เสียอื่น ๆ ไม่ได้ออกแบบมาเพื่อกลุ่มใดกลุ่มหนึ่งโดยเฉพาะ</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="3" y="4" width="9" height="9" rx="1.5" fill="none" stroke="var(--coral)" stroke-width="1.8"/>
+        <rect x="14" y="13" width="9" height="9" rx="1.5" fill="none" stroke="var(--coral)" stroke-width="1.8"/>
+        <path d="M11 9 L16 15" stroke="var(--coral)" stroke-width="1.4" stroke-dasharray="2 2"/>
+      </svg>
+      <h2>ผู้กำหนดมาตรฐาน vs ผู้กำกับดูแล — คนละบทบาทกัน</h2>
+    </div>
+    <p class="sec-sub">จุดที่มักสับสน: สองกลุ่มนี้<b>ไม่ใช่คนเดียวกัน</b> — กลุ่มหนึ่งเขียนกฎ อีกกลุ่มบังคับใช้กฎ</p>
+
+    <div class="grid-2">
+      <div class="knob">
+        <span class="where c1">คนเขียนกฎ</span>
+        <h3>Standard-Setting Bodies</h3>
+        <p class="why">องค์กรภาคเอกชน ประกอบด้วยนักบัญชี ผู้สอบบัญชี ผู้ใช้งบการเงิน และนักวิชาการที่มีประสบการณ์ — <b>ทำหน้าที่ออกกฎ</b></p>
+        <p class="out">IASB → International Accounting Standards Board
+        คณะกรรมการกำหนดมาตรฐานการบัญชีระหว่างประเทศ
+
+FASB → U.S. Financial Accounting Standards Board
+        คณะกรรมการกำหนดมาตรฐานการรายงานทางการเงินของสหรัฐฯ
+
+ประเทศไทย → สภาวิชาชีพบัญชี ในพระบรมราชูปถัมภ์
+        (คณะกรรมการกำหนดมาตรฐานการบัญชีภายในสภาวิชาชีพบัญชี)</p>
+      </div>
+      <div class="knob">
+        <span class="where c2">คนบังคับใช้กฎ</span>
+        <h3><Term id="regulatoryAuthority">Regulatory Authorities</Term></h3>
+        <p class="why">หน่วยงานภาครัฐที่มีอำนาจทางกฎหมาย<b>บังคับใช้</b>ข้อกำหนดการรายงานทางการเงิน และควบคุมกิจการที่เข้าร่วมตลาดทุนในเขตอำนาจของตน — <b>ทำหน้าที่บังคับใช้กฎ</b></p>
+        <p class="out">SEC → Securities and Exchange Commission (สหรัฐฯ)
+       คณะกรรมการกำกับหลักทรัพย์และตลาดหลักทรัพย์
+
+FSA → Financial Services Authority (สหราชอาณาจักร)
+       องค์การกำกับทางการเงิน</p>
+      </div>
+    </div>
+
+    <div class="exam" style="margin-top:20px">
+      <h4>คาถาจำ <span class="tag">โน้ต</span></h4>
+      <p style="margin:0"><b>Standard-setting body = เขียนกฎ</b> (private-sector, ผู้เชี่ยวชาญ) — <b>Regulatory authority = บังคับกฎ</b> (ภาครัฐ, มีอำนาจทางกฎหมาย) — IASB เขียน IFRS แต่ IASB เองไม่มีอำนาจบังคับใครให้ใช้ ต้องอาศัย regulatory authority ของแต่ละประเทศมาบังคับใช้อีกที</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M13 3 L23 13 L13 23 L3 13 Z" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linejoin="round"/>
+        <circle cx="13" cy="13" r="3.5" fill="var(--gold-soft)" stroke="var(--gold)" stroke-width="1.5"/>
+      </svg>
+      <h2>กรอบแนวคิด IFRS</h2>
+    </div>
+    <p class="sec-sub">วัตถุประสงค์ของงบการเงินตามกรอบ IFRS คือการนำเสนอฐานะการเงิน ผลการดำเนินงาน และกระแสเงินสดของกิจการ — กรอบทั้งหมดสร้างขึ้นเป็นลำดับชั้น ตั้งแต่คุณลักษณะเชิงคุณภาพไปจนถึงข้อจำกัดและสมมติฐานเบื้องหลัง</p>
+
+    <div class="figwrap">
+      <figure>
+        <svg viewBox="0 0 700 320" role="img" aria-label="กรอบแนวคิด IFRS เริ่มจากวัตถุประสงค์คือการนำเสนอฐานะการเงิน ผลการดำเนินงาน และกระแสเงินสดอย่างเที่ยงธรรม ถัดมาคือคุณลักษณะเชิงคุณภาพสี่ด้านคือความเข้าใจได้ ความเกี่ยวข้อง ความเชื่อถือได้ และความเปรียบเทียบได้ จากนั้นแบ่งเป็นสองด้านคือผลการดำเนินงานประกอบด้วยรายได้ ค่าใช้จ่าย และรายการปรับปรุงเงินทุน กับฐานะการเงินประกอบด้วยสินทรัพย์ หนี้สิน และส่วนของเจ้าของ ทั้งหมดอยู่ภายใต้ข้อจำกัดสามข้อและสมมติฐานเบื้องต้นสองข้อ">
+          <rect x="200" y="10" width="300" height="55" rx="8" fill="var(--gold-soft)" stroke="var(--gold)" stroke-width="2"/>
+          <text x="350" y="32" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--ink)">วัตถุประสงค์</text>
+          <text x="350" y="50" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">นำเสนอฐานะการเงิน ผลดำเนินงาน กระแสเงินสด อย่างเที่ยงธรรม</text>
+
+          <line x1="350" y1="65" x2="350" y2="85" stroke="var(--ink-3)" stroke-width="1.6"/>
+
+          <rect x="90" y="90" width="230" height="45" rx="8" fill="var(--slate-soft)" stroke="var(--slate)" stroke-width="1.8"/>
+          <text x="205" y="118" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">Understandability / Relevance</text>
+
+          <rect x="380" y="90" width="230" height="45" rx="8" fill="var(--slate-soft)" stroke="var(--slate)" stroke-width="1.8"/>
+          <text x="495" y="118" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">Reliability / Comparability</text>
+
+          <line x1="205" y1="135" x2="205" y2="160" stroke="var(--ink-3)" stroke-width="1.6"/>
+          <line x1="495" y1="135" x2="495" y2="160" stroke="var(--ink-3)" stroke-width="1.6"/>
+
+          <rect x="90" y="165" width="230" height="70" rx="8" fill="var(--coral-soft)" stroke="var(--coral)" stroke-width="1.8"/>
+          <text x="205" y="185" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">Performance (ผลการดำเนินงาน)</text>
+          <text x="205" y="203" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">Income · Expenses</text>
+          <text x="205" y="219" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">Capital Maintenance Adjustments</text>
+
+          <rect x="380" y="165" width="230" height="70" rx="8" fill="var(--violet-soft)" stroke="var(--violet)" stroke-width="1.8"/>
+          <text x="495" y="185" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">Financial Position (ฐานะการเงิน)</text>
+          <text x="495" y="203" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">Assets · Liabilities · Equity</text>
+
+          <rect x="60" y="250" width="290" height="55" rx="8" fill="var(--card)" stroke="var(--rule)" stroke-width="1.5"/>
+          <text x="205" y="270" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">ข้อจำกัด (Constraints)</text>
+          <text x="205" y="287" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">Timeliness · Benefit vs Cost</text>
+          <text x="205" y="300" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">Balance ระหว่างคุณลักษณะเชิงคุณภาพ</text>
+
+          <rect x="360" y="250" width="290" height="55" rx="8" fill="var(--card)" stroke="var(--rule)" stroke-width="1.5"/>
+          <text x="505" y="270" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">สมมติฐานเบื้องต้น</text>
+          <text x="505" y="287" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">Accrual Basis</text>
+          <text x="505" y="300" text-anchor="middle" font-size="9.5" fill="var(--ink-2)">Going Concern</text>
+        </svg>
+        <figcaption>ที่มา: Robinson et al. (2009) — ลำดับชั้นนี้คือแผนที่ทั้งหมดของหัวข้อในหน้านี้ อ่านจากบนลงล่าง</figcaption>
+      </figure>
+    </div>
+
+    <div class="tablewrap" style="margin-top:20px">
+      <table>
+        <caption>4 คุณลักษณะเชิงคุณภาพหลักที่ทำให้ข้อมูลทางการเงินมีประโยชน์</caption>
+        <thead><tr><th scope="col">คุณลักษณะ</th><th scope="col">ความหมาย</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><Term id="understandability">Understandability</Term></th><td>ความเข้าใจได้ — ข้อมูลต้องนำเสนอในรูปแบบที่ผู้ใช้เข้าใจได้</td></tr>
+          <tr><th scope="row"><Term id="relevance">Relevance</Term></th><td>ความเกี่ยวข้องกับการตัดสินใจของผู้ใช้งบ</td></tr>
+          <tr><th scope="row"><Term id="reliability">Reliability</Term></th><td>ความเชื่อถือได้ — ปราศจากข้อผิดพลาดและความลำเอียงที่มีนัยสำคัญ (มี 5 องค์ประกอบย่อย ดูด้านล่าง)</td></tr>
+          <tr><th scope="row"><Term id="comparability">Comparability</Term></th><td>เปรียบเทียบกันได้ — ทั้งข้ามบริษัทและข้ามช่วงเวลา</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="knob" style="margin-top:20px">
+      <span class="where c1">องค์ประกอบย่อยของ Reliability</span>
+      <h3>5 เสาหลักของความเชื่อถือได้</h3>
+      <ul style="margin:0;padding-left:20px;color:var(--ink-2)">
+        <li><b><Term id="faithfulRepresentation">Faithful Representation</Term></b> (การเป็นตัวแทนอันเที่ยงธรรม) — ข้อมูลต้องแสดงความจริงตามที่เกิดขึ้น</li>
+        <li><b><Term id="substanceOverForm">Substance over Form</Term></b> (เนื้อหาสำคัญกว่ารูปแบบ) — ต้องแสดงเนื้อหาทางเศรษฐกิจที่แท้จริงของธุรกรรม ไม่ใช่แค่รูปแบบทางกฎหมาย</li>
+        <li><b>Neutrality</b> (ความเป็นกลาง) — ข้อมูลต้องไม่ลำเอียงไปทางใดทางหนึ่ง</li>
+        <li><b><Term id="prudence">Prudence</Term></b> (ความระมัดระวัง) — โดยเฉพาะเรื่องการประมาณการ เช่น การประมาณอายุการใช้งานของสินทรัพย์</li>
+        <li><b>Completeness</b> (ความครบถ้วน) — ไม่ละเว้นข้อมูลที่มีนัยสำคัญ</li>
+      </ul>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="card">
+        <h3>ข้อจำกัดของงบการเงิน (Constraints)</h3>
+        <ul style="margin:0">
+          <li><b>ความจำเป็นต้องแลกกัน (Trade-off)</b> — ระหว่างคุณลักษณะที่ต้องการ เช่น ต้องเลือกระหว่างข้อมูลที่<b>เกี่ยวข้องที่สุด</b>กับข้อมูลที่<b>น่าเชื่อถือที่สุด</b> (Relevance vs Reliability)</li>
+          <li><b>ต้นทุนของการให้ข้อมูล</b> — ต้องชั่งน้ำหนักระหว่างต้นทุนกับผลประโยชน์ที่ได้ (Cost vs Benefit)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>สมมติฐานเบื้องต้น (Underlying Assumptions)</h3>
+        <ul style="margin:0">
+          <li><b><Term id="accrualBasis">Accrual Basis</Term></b> — เกณฑ์คงค้าง ส่งผลให้กำไรสุทธิไม่ได้สะท้อนกระแสเงินสดที่แท้จริง (เชื่อมกับบทที่ 2)</li>
+          <li><b><Term id="goingConcern">Going Concern</Term></b> — สมมติว่ากิจการจะดำเนินงานต่อไปในอนาคตอันใกล้ ไม่ได้เตรียมเลิกกิจการ</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="card">
+        <h3>องค์ประกอบของงบการเงิน — 2 กลุ่ม</h3>
+        <p style="color:var(--ink-2);margin:0 0 8px"><b>3 องค์ประกอบที่วัด "ฐานะการเงิน":</b> Assets, Liabilities, Equity</p>
+        <p style="color:var(--ink-2);margin:0"><b>2 องค์ประกอบที่วัด "ผลการดำเนินงาน":</b> Income, Expenses</p>
+      </div>
+      <div class="card">
+        <h3>ทำไม 5 ฐานการวัดมูลค่าถึงสำคัญ</h3>
+        <p style="color:var(--ink-2);margin:0">มาตรฐานบัญชีไม่ได้ใช้ฐานการวัดมูลค่าแบบเดียวกันหมด — สินทรัพย์แต่ละประเภทอาจวัดด้วยฐานที่ต่างกัน ทำให้การอ่านงบต้องรู้ว่า<b>ตัวเลขแต่ละบรรทัดวัดมาจากฐานไหน</b> (ดูตารางด้านล่าง)</p>
+      </div>
+    </div>
+
+    <div class="tablewrap" style="margin-top:20px">
+      <table>
+        <caption>5 ฐานการวัดมูลค่าองค์ประกอบของงบการเงิน</caption>
+        <thead><tr><th scope="col">ฐานการวัด</th><th scope="col">คำถามหลัก</th><th scope="col">คำนิยาม</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><Term id="historicalCost">Historical Cost</Term></th><td>จ่ายไปเท่าไหร่ตอนซื้อ?</td><td>จำนวนเงินสด (หรือเทียบเท่า) ที่จ่ายไปเพื่อซื้อสินทรัพย์นั้น</td></tr>
+          <tr><th scope="row"><Term id="currentCost">Current Cost</Term></th><td>วันนี้ต้องจ่ายเท่าไหร่ถ้าซื้อใหม่?</td><td>จำนวนเงินสดที่ต้องจ่ายในวันนี้เพื่อซื้อสินทรัพย์ชิ้นเดียวกันหรือเทียบเท่า</td></tr>
+          <tr><th scope="row"><Term id="realizableValue">Realizable (Settlement) Value</Term></th><td>ขายวันนี้จะได้เท่าไหร่?</td><td>จำนวนเงินสดที่จะได้รับจากการขายสินทรัพย์ในการจำหน่ายตามปกติ ณ ปัจจุบัน</td></tr>
+          <tr><th scope="row"><Term id="presentValue">Present Value</Term></th><td>ใช้สินทรัพย์นี้ต่อไป จะได้ผลตอบแทนคุ้มเท่าไหร่?</td><td>มูลค่าปัจจุบันของกระแสเงินสดสุทธิในอนาคตที่สินทรัพย์คาดว่าจะสร้างได้ตามการดำเนินธุรกิจปกติ</td></tr>
+          <tr><th scope="row"><Term id="fairValue">Fair Value</Term></th><td>แลกเปลี่ยนกันตามราคาตลาดวันนี้เท่าไหร่?</td><td>จำนวนที่สินทรัพย์สามารถแลกเปลี่ยนกันได้ สะท้อนการเปลี่ยนแปลงระดับราคา — ใช้ได้ทั้งมูลค่าตลาดและมูลค่าปัจจุบัน</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <circle cx="8" cy="13" r="6" fill="none" stroke="var(--fwd)" stroke-width="1.8"/>
+        <circle cx="18" cy="13" r="6" fill="none" stroke="var(--coral)" stroke-width="1.8"/>
+      </svg>
+      <h2>IFRS vs U.S. GAAP vs TFRS</h2>
+    </div>
+    <p class="sec-sub">โลกไม่ได้ใช้มาตรฐานเดียวกันทั้งหมด — สองระบบใหญ่ที่สุดคือ IFRS กับ U.S. GAAP ส่วนไทยใช้ TFRS ซึ่งอ้างอิงจาก IFRS</p>
+
+    <div class="grid-2">
+      <div class="knob">
+        <span class="where c1">มาตรฐานสากล</span>
+        <h3><Term id="ifrs">IFRS</Term></h3>
+        <p class="why">มาตรฐานการรายงานทางการเงินระหว่างประเทศ — ออกโดย <b>IASB</b> เป็นมาตรฐานที่สหภาพยุโรปและอีกหลายประเทศบังคับใช้ ผลักดันเป้าหมายการทำให้มาตรฐานทั่วโลก<b>บรรจบกัน (convergence)</b></p>
+      </div>
+      <div class="knob">
+        <span class="where c2">มาตรฐานสหรัฐฯ</span>
+        <h3><Term id="usGaap">U.S. GAAP</Term></h3>
+        <p class="why">ใช้ในสหรัฐอเมริกาเป็นหลัก — ออกโดย <b>FASB</b> มีแนวทางแบบ <b>rules-based</b> ที่ยืดหยุ่นน้อยกว่า IFRS (ดูหัวข้อถัดไป)</p>
+      </div>
+    </div>
+
+    <div class="knob" style="margin-top:20px">
+      <span class="where c3">มาตรฐานไทย</span>
+      <h3><Term id="tfrs">TFRS</Term> — Thai Financial Reporting Standards</h3>
+      <p class="why">แบ่งเป็น 2 ชุด: <b>TAS</b> (Thai Accounting Standards) และ <b>TFRS</b> (Thai Financial Reporting Standards ครอบคลุมการรายงานทางการเงินทั้งหมด) — ทั้งคู่<b>อ้างอิงตาม IFRS</b> ออกโดยสภาวิชาชีพบัญชี ในพระบรมราชูปถัมภ์</p>
+      <p class="out">กระบวนการจัดทำ TFRS (ศึกษา IFRS ที่เปลี่ยนแปลง แล้วปรับให้เข้ากับบริบทไทย):
+
+1. ศึกษา วิจัย และติดตาม (4 เดือน)
+2. วางแผนงานจัดทำ TFRS (ต้นเดือน ม.ค.)
+3. จัดทำ TFRS (2 เดือน)
+4. สัมมนาทำความเข้าใจ / พิจารณ์ร่าง TFRS (1 เดือน)
+5. นำเสนอร่างต่อคณะอนุกรรมการและคณะกรรมการ (3 เดือน)
+6. สรุปการเปลี่ยนแปลงและผลกระทบ (3 เดือน)</p>
+      <p class="why" style="margin:0">ที่มา: สภาวิชาชีพบัญชี ในพระบรมราชูปถัมภ์ (2569)</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M4 20 L4 6 L20 6" fill="none" stroke="var(--violet)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="4" cy="20" r="2" fill="var(--violet)"/><circle cx="12" cy="13" r="2" fill="var(--violet)"/><circle cx="20" cy="6" r="2" fill="var(--violet)"/>
+      </svg>
+      <h2>คุณลักษณะของกรอบการรายงานที่มีประสิทธิภาพ</h2>
+    </div>
+    <p class="sec-sub">การรายงานทางการเงินที่ดีช่วยให้ตัดสินใจเชิงเศรษฐกิจได้อย่างมีคุณภาพ — มี 3 คุณลักษณะหลัก</p>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3><Term id="transparency">Transparency</Term></h3>
+        <p style="color:var(--ink-2);margin:0">ความโปร่งใส — ผู้ใช้งบสามารถมองเห็นเศรษฐกิจที่แท้จริงของธุรกิจสะท้อนอยู่ในงบการเงินได้ชัดเจน การเปิดเผยข้อมูลครบถ้วนและนำเสนออย่างเที่ยงธรรมคือตัวสร้างความโปร่งใส</p>
+      </div>
+      <div class="card">
+        <h3><Term id="comprehensiveness">Comprehensiveness</Term></h3>
+        <p style="color:var(--ink-2);margin:0">ความครบถ้วน — กรอบต้องครอบคลุมพอที่จะให้แนวทางบันทึกได้ทั้งธุรกรรมที่มีอยู่แล้วและธุรกรรมรูปแบบใหม่ที่เพิ่งเกิดขึ้น</p>
+      </div>
+      <div class="card">
+        <h3><Term id="consistency">Consistency</Term></h3>
+        <p style="color:var(--ink-2);margin:0">ความสม่ำเสมอ — รับประกันความสม่ำเสมอที่สมเหตุสมผลทั้งข้ามบริษัทและข้ามช่วงเวลา</p>
+      </div>
+    </div>
+
+    <div class="exam" style="margin-top:20px">
+      <h4>ทำไมยังไม่มีกรอบแนวคิดเดียวที่สมบูรณ์แบบ <span class="tag">โน้ต</span></h4>
+      <p><b>เรื่องการวัดมูลค่า:</b> Fair value อาจ<b>เกี่ยวข้อง (relevant)</b> มากกว่า แต่ historical cost อาจ<b>น่าเชื่อถือ (reliable)</b> มากกว่า — สองคุณลักษณะนี้ดึงกันคนละทาง เลือกได้ไม่ครบทั้งคู่พร้อมกัน</p>
+      <p><b>เรื่องแนวทางการกำหนดมาตรฐาน มี 3 แบบ:</b></p>
+      <ul>
+        <li><b>Principles-based</b> — ให้กรอบกว้าง ๆ โดยไม่มีแนวทางเจาะจงว่าต้องรายงานธุรกรรมหนึ่ง ๆ ยังไง ยืดหยุ่นสูง (ลักษณะของ <b>IFRS</b>)</li>
+        <li><b>Rules-based</b> — กำหนดกฎเฉพาะเจาะจงสำหรับแต่ละธุรกรรม ยืดหยุ่นน้อยกว่า (ลักษณะของ <b>U.S. GAAP</b>)</li>
+        <li><b>Objectives-oriented</b> — ผสมทั้งสองแบบ มีทั้งกรอบหลักการและแนวทางปฏิบัติในระดับที่เหมาะสม</li>
+      </ul>
+      <p style="margin:0"><b>เรื่องการวัดผล:</b> งบฐานะการเงินนำเสนอ ณ<b>จุดเวลาหนึ่ง</b> (point in time) ในขณะที่งบกำไรขาดทุนสะท้อนการเปลี่ยนแปลง<b>ระหว่างช่วงเวลา</b> (period of time) — ธรรมชาติที่ต่างกันของสองงบทำให้ยากที่จะสร้างกรอบเดียวที่ครอบคลุมทั้งคู่ได้อย่างสมบูรณ์</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M4 13 A9 9 0 1 1 13 22" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M4 13 L4 7 M4 13 L10 13" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <h2>ติดตามความเคลื่อนไหวของมาตรฐานการรายงาน</h2>
+    </div>
+    <p class="sec-sub">มาตรฐานการรายงานทางการเงินเปลี่ยนแปลงอย่างรวดเร็ว นักวิเคราะห์ต้องติดตามพัฒนาการอย่างต่อเนื่องและประเมินผลกระทบต่อการวิเคราะห์และประเมินมูลค่าหลักทรัพย์</p>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>1. ผลิตภัณฑ์/ธุรกรรมใหม่</h3>
+        <p style="color:var(--ink-2);margin:0;font-size:.9rem">มีธุรกรรมทางธุรกิจรูปแบบใหม่อะไรเกิดขึ้นบ้างที่มาตรฐานปัจจุบันอาจยังไม่ครอบคลุม</p>
+      </div>
+      <div class="card">
+        <h3>2. การเคลื่อนไหวของผู้กำหนดมาตรฐาน</h3>
+        <p style="color:var(--ink-2);margin:0;font-size:.9rem">ผู้กำหนดมาตรฐานและกลุ่มตัวแทนผู้ใช้งบมีการเปลี่ยนแปลงท่าทีหรือแนวปฏิบัติอย่างไร</p>
+      </div>
+      <div class="card">
+        <h3>3. นโยบาย/ประมาณการทางบัญชีที่สำคัญของบริษัท</h3>
+        <p style="color:var(--ink-2);margin:0;font-size:.9rem">บริษัทต้องเปิดเผยนโยบายและประมาณการทางบัญชีในหมายเหตุประกอบงบการเงิน — ต้องติดตามว่ามีการเปลี่ยนแปลงนโยบายใหม่หรือไม่</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h3>สรุปบทที่ 3</h3>
+      <ul>
+        <li>วัตถุประสงค์ของการรายงานทางการเงินคือให้ข้อมูลที่มีประโยชน์ต่อการตัดสินใจเชิงเศรษฐกิจของผู้ใช้หลากหลายกลุ่ม</li>
+        <li>หน่วยงานกำหนดมาตรฐาน (เขียนกฎ) กับหน่วยงานกำกับดูแล (บังคับใช้กฎ) เป็นคนละบทบาทกัน</li>
+        <li>กรอบแนวคิด IFRS ประกอบด้วยคุณลักษณะเชิงคุณภาพ 4 ด้าน ข้อจำกัด 2 เรื่อง และสมมติฐานเบื้องต้น 2 ข้อ</li>
+        <li>IFRS ใช้แนวทาง principles-based ส่วน U.S. GAAP ใช้แนวทาง rules-based — TFRS ของไทยอ้างอิงตาม IFRS</li>
+        <li>กรอบการรายงานที่มีประสิทธิภาพต้องมีความโปร่งใส ครบถ้วน และสม่ำเสมอ แต่ยังมีข้อจำกัดที่ทำให้ไม่มีกรอบเดียวที่สมบูรณ์แบบ</li>
+        <li>นักวิเคราะห์ต้องติดตามพัฒนาการของมาตรฐานอย่างต่อเนื่อง เพราะมันเปลี่ยนแปลงเร็วและมีผลต่อการวิเคราะห์</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Financial Statement Analysis (BS923102) · บทที่ 3: Financial Reporting Standard · เรียบเรียงจากเอกสารประกอบการสอน — Asst Prof. Dr. Chamaiporn Kumpamool
+  </footer>
+
 </Layout>

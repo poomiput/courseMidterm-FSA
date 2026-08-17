@@ -1,7 +1,442 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ComingSoon from "../components/ComingSoon.astro";
+import Term from "../components/Term.astro";
 ---
-<Layout title="Financial Reporting Mechanics" description="บทที่ 2 — กลไกการทำรายการทางการเงิน — ธุรกรรมของกิจการถูกจำแนก บันทึก และไหลไปโผล่ในงบการเงินได้ยังไง">
-  <ComingSoon n={2} title="Financial Reporting Mechanics" accent="var(--slate)" blurb="กลไกการทำรายการทางการเงิน — ธุรกรรมของกิจการถูกจำแนก บันทึก และไหลไปโผล่ในงบการเงินได้ยังไง" />
+<Layout title="Financial Reporting Mechanics" description="บทที่ 2 — กลไกการทำรายการทางการเงิน: การจำแนกกิจกรรมทางธุรกิจ สมการบัญชี ความสัมพันธ์ระหว่างงบการเงิน และการปรับปรุงรายการค้างรับค้างจ่าย">
+
+  <header class="masthead">
+    <p class="eyebrow" style="color:var(--slate)">Financial Statement Analysis · บทที่ 2</p>
+    <h1>Financial Reporting Mechanics</h1>
+    <p class="deck">งบการเงินคือ "ผลลัพธ์ปลายทาง" ของกระบวนการบันทึกธุรกรรม — ถ้าไม่เข้าใจว่าตัวเลขแต่ละบรรทัดมาจากไหน ก็จะวิเคราะห์งบได้แค่ผิวเผิน บทนี้แกะกลไกตั้งแต่ธุรกรรมหนึ่งรายการ ไปจนถึงงบการเงินครบชุด</p>
+    <div class="credit-bar">
+      <span>Operating / Investing / Financing</span><span>A = L + E</span><span>Accruals</span><span>Direct vs Indirect CF</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="grid-2">
+      <div class="card">
+        <h3>ทำไมนักวิเคราะห์ต้องรู้เรื่องนี้</h3>
+        <ul>
+          <li>งบการเงินคือ<b>ผลลัพธ์ปลายทาง</b>ของกระบวนการบันทึกธุรกรรมที่เกี่ยวกับการดำเนินงาน การจัดหาเงิน และการลงทุนของกิจการ</li>
+          <li>โครงสร้างของงบการเงินสะท้อนระบบที่ใช้บันทึกและจัดกลุ่มธุรกรรมเหล่านั้น</li>
+          <li>ผู้ใช้งบที่ "รู้เท่าทัน" ต้องเข้าใจหลักการของระบบนี้ — เพื่อให้รู้ว่าตัวเลขแต่ละบรรทัดมาจากไหน ไม่ใช่แค่เชื่อตัวเลขที่เห็น</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>สิ่งที่บทนี้ครอบคลุม</h3>
+        <ul>
+          <li><b>การจำแนกกิจกรรมทางธุรกิจ</b> — Operating, Investing, Financing</li>
+          <li><b>บัญชีและงบการเงิน</b> — สมการบัญชีที่เชื่อมทุกงบเข้าด้วยกัน</li>
+          <li><b>ความสัมพันธ์ระหว่างงบการเงิน</b> — งบต้นงวดไปงบปลายงวดผ่านอะไรบ้าง</li>
+          <li><b>กระบวนการทางบัญชี</b> — ตัวอย่างงบการเงินครบชุด</li>
+          <li><b>รายการค้างรับค้างจ่าย</b> และ<b>การปรับมูลค่า</b></li>
+          <li>การใช้งบการเงินในการวิเคราะห์หลักทรัพย์ — จุดที่ดุลยพินิจเข้ามาเกี่ยวข้อง</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="3" y="4" width="8" height="8" rx="1.5" fill="none" stroke="var(--slate)" stroke-width="1.8"/>
+        <rect x="15" y="4" width="8" height="8" rx="1.5" fill="none" stroke="var(--slate)" stroke-width="1.8"/>
+        <rect x="9" y="15" width="8" height="8" rx="1.5" fill="none" stroke="var(--slate)" stroke-width="1.8"/>
+      </svg>
+      <h2>การจำแนกกิจกรรมทางธุรกิจ</h2>
+    </div>
+    <p class="sec-sub">นักบัญชีให้การปฏิบัติทางบัญชีที่<b>คล้ายกัน</b>กับธุรกรรมประเภทเดียวกัน — กิจกรรมทางธุรกิจทั้งหมดจำแนกได้เป็น 3 กลุ่ม</p>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3><Term id="operatingActivities">Operating Activities</Term></h3>
+        <p style="color:var(--ink-2);margin:0">กิจกรรมที่เป็นส่วนหนึ่งของการดำเนินธุรกิจประจำวันของกิจการ — รายได้ ค่าใช้จ่าย และเงินทุนหมุนเวียนส่วนใหญ่อยู่ในกลุ่มนี้</p>
+      </div>
+      <div class="card">
+        <h3><Term id="investingActivities">Investing Activities</Term></h3>
+        <p style="color:var(--ink-2);margin:0">กิจกรรมที่เกี่ยวข้องกับการ<b>ได้มาและจำหน่ายสินทรัพย์ระยะยาว</b> เช่น ที่ดิน อาคาร อุปกรณ์ หรือเงินลงทุน</p>
+      </div>
+      <div class="card">
+        <h3><Term id="financingActivities">Financing Activities</Term></h3>
+        <p style="color:var(--ink-2);margin:0">กิจกรรมที่เกี่ยวข้องกับการ<b>ได้มาหรือชำระคืนเงินทุน</b> — มาจากสองแหล่งหลัก: เจ้าของ (ผู้ถือหุ้น) หรือเจ้าหนี้</p>
+      </div>
+    </div>
+
+    <div class="exam" style="margin-top:20px">
+      <h4>ไม่ใช่ทุกธุรกรรมจะจัดกลุ่มได้เนียน ๆ <span class="tag">โน้ต</span></h4>
+      <p style="margin:0">กรอบ 3 กลุ่มนี้ช่วยจัดระเบียบความคิดได้มาก แต่<b>ไม่ใช่ทุกธุรกรรมจะเข้ากรอบนี้ได้พอดี</b>เวลานำเสนอในงบการเงินจริง — บางรายการมีลักษณะก้ำกึ่งระหว่างสองกลุ่ม (เช่น ดอกเบี้ยจ่าย ที่เกี่ยวข้องทั้งการดำเนินงานและการจัดหาเงิน ดูตารางด้านล่าง)</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="tablewrap">
+        <table>
+          <caption>งบฐานะการเงิน ↔ กิจกรรมทางธุรกิจ</caption>
+          <thead><tr><th scope="col">รายการในงบฐานะการเงิน</th><th scope="col">กิจกรรมที่เกี่ยวข้อง</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">สินทรัพย์หมุนเวียน</th><td>ดำเนินงาน</td></tr>
+            <tr><th scope="row">สินทรัพย์ไม่หมุนเวียน</th><td>ลงทุน</td></tr>
+            <tr><th scope="row">หนี้สินหมุนเวียน</th><td>ดำเนินงาน</td></tr>
+            <tr><th scope="row">หนี้สินไม่หมุนเวียน</th><td>จัดหาเงิน</td></tr>
+            <tr><th scope="row">ทุนเรือนหุ้น</th><td>จัดหาเงิน</td></tr>
+            <tr><th scope="row">กำไรสะสม</th><td>ดำเนินงานและจัดหาเงิน</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <caption>งบกำไรขาดทุน ↔ กิจกรรมทางธุรกิจ</caption>
+          <thead><tr><th scope="col">รายการในงบกำไรขาดทุน</th><th scope="col">กิจกรรมที่เกี่ยวข้อง</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">รายได้</th><td>ดำเนินงาน</td></tr>
+            <tr><th scope="row">ค่าใช้จ่าย</th><td>ดำเนินงาน</td></tr>
+            <tr><th scope="row">ดอกเบี้ยจ่าย</th><td>ดำเนินงานและจัดหาเงิน</td></tr>
+            <tr><th scope="row">ภาษีเงินได้</th><td>ดำเนินงาน</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p style="color:var(--ink-2);font-size:.85rem;margin-top:10px">ที่มา: ฝ่ายพัฒนาความรู้ผู้ประกอบวิชาชีพ (2564)</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M4 13 L22 13" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M8 6 L8 20 M18 6 L18 20" stroke="var(--coral)" stroke-width="1.6"/>
+      </svg>
+      <h2>บัญชีและงบการเงิน — สมการที่เชื่อมทุกอย่างเข้าด้วยกัน</h2>
+    </div>
+    <p class="sec-sub"><b>บัญชี (Accounts)</b> คือบันทึกรายบุคคลของการเพิ่มขึ้น-ลดลงในธุรกรรมหนึ่ง ๆ — นักบัญชีบันทึกทีละรายการทุกวัน แล้วรวบรวมสรุปเป็นงบการเงินแต่ละองค์ประกอบ</p>
+
+    <div class="grid-2">
+      <div class="knob">
+        <span class="where c1">งบฐานะการเงิน</span>
+        <h3>Balance Sheet Equation</h3>
+        <pre>Assets = Liabilities + Owners' Equity
+Assets - Liabilities = Owners' Equity
+Owners' Equity = Contributed Capital + Retained Earnings</pre>
+        <p class="why" style="margin:0">ส่วนของเจ้าของ (Owners' Equity) คือ<b>สิทธิเรียกร้องคงเหลือ</b>ของเจ้าของกิจการ หลังหักภาระผูกพันต่อเจ้าหนี้ออกจากสินทรัพย์ทั้งหมดแล้ว</p>
+      </div>
+      <div class="knob">
+        <span class="where c2">งบกำไรขาดทุน</span>
+        <h3>Income Statement Equation</h3>
+        <pre>Revenue - Expenses = Net Income (or Loss)
+Net Income - Other Comprehensive Income = Total Comprehensive Income</pre>
+        <p class="why" style="margin:0">กำไรสุทธิ (Net Income) เป็นแค่ส่วนหนึ่งของกำไรขาดทุนเบ็ดเสร็จรวม — ยังมีรายการ Other Comprehensive Income ที่ไม่ผ่านงบกำไรขาดทุนปกติ</p>
+      </div>
+    </div>
+
+    <div class="knob" style="margin-top:20px">
+      <span class="where c3">ตัวเชื่อมสองงบ</span>
+      <h3>Retained Earnings — สะพานเชื่อมงบฐานะการเงินกับงบกำไรขาดทุน</h3>
+      <pre>Ending Retained Earnings = Beginning Retained Earnings + Net Income - Dividends
+Ending Retained Earnings = Beginning RE + Revenues - Expenses - Dividends
+
+รวมทุกสมการเข้าด้วยกัน:
+Assets = Liabilities + Contributed Capital + Beginning RE + Revenue - Expenses - Dividends</pre>
+      <p class="why" style="margin:0">นี่คือจุดสำคัญที่สุดของบทนี้: <b>กำไรสะสมคือสิ่งที่ทำให้งบฐานะการเงินสองช่วงเวลาเชื่อมกันได้ผ่านงบกำไรขาดทุนของงวดระหว่างนั้น</b> — ตัวอย่างด้านล่างแสดงให้เห็นการเชื่อมนี้แบบเป็นรูปธรรม</p>
+    </div>
+
+    <div class="figwrap" style="margin-top:20px">
+      <figure>
+        <svg viewBox="0 0 720 260" role="img" aria-label="ตัวอย่างบริษัท XYZ จำกัด มหาชน งบฐานะการเงิน ณ สิ้นปี 25x0 มีสินทรัพย์รวม 5000 ล้านบาท ส่วนของเจ้าของ 4000 ล้านบาท ระหว่างปี 25x1 มีรายได้ 500 ค่าใช้จ่าย 100 กำไรสุทธิ 400 ล้านบาท ไม่มีเงินปันผล ทำให้กำไรสะสมเพิ่มจาก 1500 เป็น 1900 ล้านบาท และงบฐานะการเงิน ณ สิ้นปี 25x1 มีสินทรัพย์รวมเพิ่มเป็น 5400 ล้านบาท ส่วนของเจ้าของเพิ่มเป็น 4400 ล้านบาท">
+          <rect x="20" y="40" width="180" height="120" rx="8" fill="var(--slate-soft)" stroke="var(--slate)" stroke-width="2"/>
+          <text x="110" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">งบฐานะการเงิน</text>
+          <text x="110" y="75" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">31 ธ.ค. 25x0</text>
+          <text x="110" y="100" text-anchor="middle" font-size="11" fill="var(--ink)">สินทรัพย์รวม 5,000</text>
+          <text x="110" y="118" text-anchor="middle" font-size="11" fill="var(--ink)">ส่วนของเจ้าของ 4,000</text>
+          <text x="110" y="136" text-anchor="middle" font-size="10" fill="var(--ink-2)">(กำไรสะสม 1,500)</text>
+
+          <line x1="200" y1="100" x2="260" y2="100" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+          <rect x="260" y="20" width="200" height="70" rx="8" fill="var(--coral-soft)" stroke="var(--coral)" stroke-width="2"/>
+          <text x="360" y="40" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">งบกำไรขาดทุน 25x1</text>
+          <text x="360" y="58" text-anchor="middle" font-size="11" fill="var(--ink)">รายได้ 500 − ค่าใช้จ่าย 100</text>
+          <text x="360" y="76" text-anchor="middle" font-size="12" font-weight="700" fill="var(--coral)">กำไรสุทธิ = 400</text>
+
+          <rect x="260" y="110" width="200" height="70" rx="8" fill="var(--gold-soft)" stroke="var(--gold)" stroke-width="2"/>
+          <text x="360" y="130" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">งบกำไรสะสม 25x1</text>
+          <text x="360" y="148" text-anchor="middle" font-size="11" fill="var(--ink)">1,500 + 400 − 0 (ปันผล)</text>
+          <text x="360" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="var(--gold)">ปลายงวด = 1,900</text>
+
+          <line x1="460" y1="100" x2="520" y2="100" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+          <rect x="520" y="40" width="180" height="120" rx="8" fill="var(--fwd-soft, var(--card))" stroke="var(--fwd)" stroke-width="2"/>
+          <text x="610" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">งบฐานะการเงิน</text>
+          <text x="610" y="75" text-anchor="middle" font-size="10.5" fill="var(--ink-2)">31 ธ.ค. 25x1</text>
+          <text x="610" y="100" text-anchor="middle" font-size="11" fill="var(--fwd)" font-weight="700">สินทรัพย์รวม 5,400</text>
+          <text x="610" y="118" text-anchor="middle" font-size="11" fill="var(--fwd)" font-weight="700">ส่วนของเจ้าของ 4,400</text>
+          <text x="610" y="136" text-anchor="middle" font-size="10" fill="var(--ink-2)">(กำไรสะสม 1,900)</text>
+
+          <text x="360" y="225" text-anchor="middle" font-size="11.5" fill="var(--ink-2)">กำไรสุทธิ 400 ไหลผ่านกำไรสะสม ทำให้ส่วนของเจ้าของเพิ่มขึ้น 400 พอดี</text>
+          <text x="360" y="243" text-anchor="middle" font-size="11.5" fill="var(--ink-2)">(4,000 → 4,400) และสินทรัพย์รวมก็เพิ่มขึ้น 400 เท่ากัน (5,000 → 5,400)</text>
+        </svg>
+        <figcaption>หน่วย: ล้านบาท · ที่มา: ปรับปรุงจาก Robinson et al. (2009) — สังเกตว่างบกำไรขาดทุนเป็นตัว "อธิบาย" ว่าทำไมงบฐานะการเงินสองช่วงเวลาถึงเปลี่ยนไป ไม่ใช่งบที่แยกขาดจากกัน</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <circle cx="13" cy="6" r="3" fill="none" stroke="var(--violet)" stroke-width="1.8"/>
+        <circle cx="13" cy="20" r="3" fill="none" stroke="var(--violet)" stroke-width="1.8"/>
+        <line x1="13" y1="9" x2="13" y2="17" stroke="var(--violet)" stroke-width="1.8"/>
+        <path d="M13 13 L6 13 M13 13 L20 13" stroke="var(--violet)" stroke-width="1.4" stroke-dasharray="3 2"/>
+      </svg>
+      <h2>ความสัมพันธ์ระหว่างงบการเงิน</h2>
+    </div>
+    <p class="sec-sub">งบการเงินไม่ได้แยกกันอิสระ — ทั้งหมดคือการอธิบาย<b>การเปลี่ยนแปลงฐานะการเงินระหว่างงวด</b>ในมุมที่ต่างกัน</p>
+
+    <div class="figwrap">
+      <figure>
+        <svg viewBox="0 0 640 300" role="img" aria-label="งบฐานะการเงิน ณ วันต้นงวด อยู่ด้านบน เชื่อมลงมายังสามงบระหว่างงวดคือ งบกำไรขาดทุนหรืองบกำไรขาดทุนเบ็ดเสร็จ งบการเปลี่ยนแปลงส่วนของเจ้าของ และงบกระแสเงินสด ทั้งสามงบนี้รวมกันอธิบายสาเหตุของการเปลี่ยนแปลง แล้วบรรจบลงมาเป็นงบฐานะการเงิน ณ วันสิ้นงวด ด้านล่าง">
+          <rect x="220" y="20" width="200" height="50" rx="8" fill="var(--slate-soft)" stroke="var(--slate)" stroke-width="2"/>
+          <text x="320" y="50" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">งบฐานะการเงิน ณ วันต้นงวด</text>
+
+          <line x1="320" y1="70" x2="320" y2="95" stroke="var(--ink-3)" stroke-width="1.6"/>
+          <line x1="150" y1="95" x2="490" y2="95" stroke="var(--ink-3)" stroke-width="1.6"/>
+          <line x1="150" y1="95" x2="150" y2="115" stroke="var(--ink-3)" stroke-width="1.6" marker-end="url(#fsa-arr)"/>
+          <line x1="320" y1="95" x2="320" y2="115" stroke="var(--ink-3)" stroke-width="1.6" marker-end="url(#fsa-arr)"/>
+          <line x1="490" y1="95" x2="490" y2="115" stroke="var(--ink-3)" stroke-width="1.6" marker-end="url(#fsa-arr)"/>
+
+          <rect x="60" y="120" width="180" height="55" rx="8" fill="var(--coral-soft)" stroke="var(--coral)" stroke-width="2"/>
+          <text x="150" y="143" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">งบกำไรขาดทุน</text>
+          <text x="150" y="160" text-anchor="middle" font-size="10" fill="var(--ink-2)">(หรือกำไรขาดทุนเบ็ดเสร็จ)</text>
+
+          <rect x="230" y="120" width="180" height="55" rx="8" fill="var(--gold-soft)" stroke="var(--gold)" stroke-width="2"/>
+          <text x="320" y="143" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">งบการเปลี่ยนแปลง</text>
+          <text x="320" y="160" text-anchor="middle" font-size="10" fill="var(--ink-2)">ส่วนของเจ้าของ</text>
+
+          <rect x="400" y="120" width="180" height="55" rx="8" fill="var(--violet-soft)" stroke="var(--violet)" stroke-width="2"/>
+          <text x="490" y="143" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">งบกระแสเงินสด</text>
+          <text x="490" y="160" text-anchor="middle" font-size="10" fill="var(--ink-2)">สำหรับงวด</text>
+
+          <line x1="150" y1="175" x2="150" y2="205" stroke="var(--ink-3)" stroke-width="1.6"/>
+          <line x1="320" y1="175" x2="320" y2="205" stroke="var(--ink-3)" stroke-width="1.6"/>
+          <line x1="490" y1="175" x2="490" y2="205" stroke="var(--ink-3)" stroke-width="1.6"/>
+          <line x1="150" y1="205" x2="490" y2="205" stroke="var(--ink-3)" stroke-width="1.6"/>
+          <line x1="320" y1="205" x2="320" y2="230" stroke="var(--ink-3)" stroke-width="1.6" marker-end="url(#fsa-arr)"/>
+
+          <rect x="220" y="235" width="200" height="50" rx="8" fill="var(--fwd-soft, var(--card))" stroke="var(--fwd)" stroke-width="2"/>
+          <text x="320" y="265" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">งบฐานะการเงิน ณ วันสิ้นงวด</text>
+
+          <defs><marker id="fsa-arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="var(--ink-3)"/></marker></defs>
+        </svg>
+        <figcaption>ที่มา: ฝ่ายพัฒนาความรู้ผู้ประกอบวิชาชีพ (2564) — คาถาจำ: <b>"การเปลี่ยนแปลงฐานะการเงินระหว่างงวด = สาเหตุของการเปลี่ยนแปลงฐานะการเงินระหว่างงวด"</b> งบสามตัวตรงกลางคือคำอธิบายว่า "ทำไม" ฐานะการเงินถึงเปลี่ยนจากต้นงวดไปสิ้นงวด</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="3" y="3" width="20" height="20" rx="4" fill="none" stroke="var(--gold)" stroke-width="1.8"/>
+        <line x1="8" y1="9" x2="18" y2="9" stroke="var(--gold)" stroke-width="1.8"/>
+        <line x1="8" y1="14" x2="18" y2="14" stroke="var(--gold)" stroke-width="1.8"/>
+        <line x1="8" y1="19" x2="14" y2="19" stroke="var(--gold)" stroke-width="1.8"/>
+      </svg>
+      <h2>กระบวนการทางบัญชี — ตัวอย่างงบการเงินครบชุด</h2>
+    </div>
+    <p class="sec-sub">กระบวนการทางบัญชีคือการ<b>บันทึก</b>ธุรกรรมทางธุรกิจ — ตัวอย่างจากสไลด์แสดงตั้งแต่ธุรกรรมแรกสุด (ตั้งบริษัท) ไปจนถึงงบการเงินครบชุด 4 งบ</p>
+
+    <div class="knob">
+      <span class="where c1">ธุรกรรมแรกสุด — บริษัท D จำกัด</span>
+      <h3>จากธุรกรรมหนึ่งรายการ สู่งบฐานะการเงิน</h3>
+      <p class="why">บริษัท D จำกัด ยื่นเอกสารจัดตั้งนิติบุคคล เริ่มแรกเพิ่มทุนด้วยเงินฝาก 280,000 บาทจากเจ้าของ 3 คน</p>
+      <p class="out">ผลทางบัญชี: เงินสด (สินทรัพย์) เพิ่มขึ้น 280,000 บาท
+          ทุนเรือนหุ้น (ส่วนของเจ้าของ) เพิ่มขึ้น 280,000 บาท</p>
+      <p class="why" style="margin:0">งบฐานะการเงิน ณ 31 ธ.ค. 25X1: สินทรัพย์ (เงินสด) 280,000 บาท = หนี้สินและส่วนของเจ้าของ (ทุนเรือนหุ้น) 280,000 บาท — สมการยังสมดุลเสมอตั้งแต่ธุรกรรมแรก</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="card">
+        <h3>2 รูปแบบของงบกระแสเงินสด</h3>
+        <ul style="margin:0">
+          <li><b><Term id="directFormat">Direct Format</Term></b> — ส่วนกระแสเงินสดจากการดำเนินงานแสดงเป็น เงินสดรับจากการดำเนินงาน <b>ลบ</b> เงินสดจ่ายจากการดำเนินงาน โดยตรง</li>
+          <li><b><Term id="indirectFormat">Indirect Format</Term></b> — เริ่มจากกำไรสุทธิ แล้วปรับปรุงรายการต่าง ๆ เพื่อให้ได้กระแสเงินสดจากการดำเนินงาน</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ตัวอย่างครบชุด — บริษัท ABC จำกัด (มหาชน)</h3>
+        <p style="color:var(--ink-2);margin:0">4 งบด้านล่างเป็นชุดเดียวกัน มาจากกิจการเดียวกัน สำหรับปีสิ้นสุด 31 ธันวาคม 25x1 — สังเกตว่าตัวเลข "กำไรสุทธิ" และ "เงินสดปลายงวด" เชื่อมโยงข้ามงบ 3-4 ตัวได้อย่างไร</p>
+      </div>
+    </div>
+
+    <div class="tablewrap" style="margin-top:20px">
+      <table>
+        <caption>งบฐานะการเงิน ณ วันที่ 31 ธันวาคม (หน่วย: บาท)</caption>
+        <thead><tr><th scope="col">รายการ</th><th scope="col">25x0</th><th scope="col">25x1</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">เงินสด</th><td>180,000</td><td>60,850</td></tr>
+          <tr><th scope="row">เงินลงทุนระยะสั้น</th><td>0</td><td>100,000</td></tr>
+          <tr><th scope="row">ลูกหนี้การค้า</th><td>0</td><td>125,000</td></tr>
+          <tr><th scope="row">สินค้าคงเหลือ</th><td>—</td><td>8,700</td></tr>
+          <tr><th scope="row">วัสดุสิ้นเปลืองสุทธิ</th><td>—</td><td>4,750</td></tr>
+          <tr><th scope="row"><b>รวมสินทรัพย์</b></th><td><b>180,000</b></td><td><b>299,300</b></td></tr>
+          <tr><th scope="row">เจ้าหนี้การค้า</th><td>0</td><td>30,000</td></tr>
+          <tr><th scope="row">ค่าใช้จ่ายค้างจ่าย</th><td>—</td><td>2,000</td></tr>
+          <tr><th scope="row">เงินกู้ยืมธนาคาร</th><td>—</td><td>80,000</td></tr>
+          <tr><th scope="row"><b>รวมหนี้สิน</b></th><td>—</td><td><b>112,000</b></td></tr>
+          <tr><th scope="row">หุ้นสามัญ</th><td>180,000</td><td>180,000</td></tr>
+          <tr><th scope="row">กำไรสะสม</th><td>0</td><td>7,300</td></tr>
+          <tr><th scope="row"><b>รวมส่วนของเจ้าของ</b></th><td><b>180,000</b></td><td><b>187,300</b></td></tr>
+          <tr><th scope="row"><b>รวมหนี้สินและส่วนของเจ้าของ</b></th><td><b>180,000</b></td><td><b>299,300</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="tablewrap">
+        <table>
+          <caption>งบกำไรขาดทุน สำหรับปี 25x1</caption>
+          <tbody>
+            <tr><th scope="row">รายได้</th><td>20,000</td></tr>
+            <tr><th scope="row">ต้นทุนขาย</th><td>9,200</td></tr>
+            <tr><th scope="row">กำไรขั้นต้น</th><td>10,800</td></tr>
+            <tr><th scope="row">ค่าใช้จ่ายอื่น</th><td>3,500</td></tr>
+            <tr><th scope="row"><b>กำไรสุทธิ</b></th><td><b>7,300</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <caption>งบกระแสเงินสด สำหรับปี 25x1</caption>
+          <tbody>
+            <tr><th scope="row">กระแสเงินสดจากดำเนินงาน</th><td>(130,000)</td></tr>
+            <tr><th scope="row">กระแสเงินสดจากลงทุน</th><td>(4,000)</td></tr>
+            <tr><th scope="row">กระแสเงินสดจากจัดหาเงินทุน</th><td>14,850</td></tr>
+            <tr><th scope="row">เงินสดลดลงสุทธิ</th><td>(119,150)</td></tr>
+            <tr><th scope="row">เงินสดต้นงวด</th><td>180,000</td></tr>
+            <tr><th scope="row"><b>เงินสดปลายงวด</b></th><td><b>60,850</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tablewrap" style="margin-top:20px">
+      <table>
+        <caption>งบแสดงส่วนของเจ้าของ ณ วันที่ 31 ธันวาคม 25x1</caption>
+        <thead><tr><th scope="col">รายการ</th><th scope="col">หุ้นสามัญ</th><th scope="col">กำไรสะสม</th><th scope="col">รวม</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">ยอด ณ 31 ธ.ค. 25x0</th><td>180,000</td><td>0</td><td>180,000</td></tr>
+          <tr><th scope="row">กำไรสุทธิ</th><td>—</td><td>7,300</td><td>7,300</td></tr>
+          <tr><th scope="row">การจ่ายเงินปันผล</th><td>—</td><td>0</td><td>0</td></tr>
+          <tr><th scope="row"><b>ยอด ณ 31 ธ.ค. 25x1</b></th><td><b>180,000</b></td><td><b>7,300</b></td><td><b>187,300</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:var(--ink-2);font-size:.85rem;margin-top:10px">ที่มา: ปรับปรุงจาก Robinson et al. (2009) — สังเกต: กำไรสุทธิ 7,300 บาท ปรากฏทั้งในงบกำไรขาดทุนและงบแสดงส่วนของเจ้าของ (ไปเพิ่มกำไรสะสม) แต่<b>เงินสดกลับลดลง</b> 119,150 บาท เพราะกำไรทางบัญชีกับกระแสเงินสดจริงเป็นคนละเรื่องกัน — นี่คือเหตุผลที่ต้องมีงบกระแสเงินสดแยกต่างหาก</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <path d="M4 13 L11 13 M15 13 L22 13" stroke="var(--coral)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M11 9 L15 13 L11 17" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h2>รายการค้างรับค้างจ่าย และการปรับมูลค่า</h2>
+    </div>
+    <p class="sec-sub"><Term id="accrualAccounting">Accrual Accounting</Term> คือการบันทึกรายได้เมื่อ<b>เกิดขึ้นจริง</b>และค่าใช้จ่ายเมื่อ<b>เกิดภาระ</b> โดยไม่ต้องรอเงินสดเข้า-ออกจริง — ถ้าการเคลื่อนไหวของเงินสดกับการรับรู้ทางบัญชีเกิดขึ้น<b>พร้อมกัน</b> ไม่ต้องมีรายการปรับปรุงเลย แต่ถ้าเกิด<b>ก่อนหรือหลัง</b>กัน ต้องมีรายการค้างรับค้างจ่ายมาปรับ</p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>Matrix ของรายการค้างรับค้างจ่าย — จับคู่ตามจังหวะเงินสดกับการรับรู้บัญชี</caption>
+        <thead><tr><th scope="col"></th><th scope="col">เงินสดมาก่อนรับรู้บัญชี</th><th scope="col">พร้อมกัน</th><th scope="col">เงินสดมาหลังรับรู้บัญชี</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">รายได้</th><td><Term id="unearnedRevenue">Unearned (Deferred) Revenue</Term></td><td rowspan="2" style="text-align:center;color:var(--ink-3)">ไม่ต้องปรับปรุง</td><td><Term id="unbilledRevenue">Unbilled (Accrued) Revenue</Term></td></tr>
+          <tr><th scope="row">ค่าใช้จ่าย</th><td><Term id="prepaidExpense">Prepaid Expense</Term></td><td><Term id="accruedExpenses">Accrued Expenses</Term></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="card">
+        <h3>ฝั่งรายได้</h3>
+        <ul style="margin:0">
+          <li><b>Unearned (Deferred) Revenue</b> (รายได้รับล่วงหน้า) — ได้รับเงินสด<b>ก่อน</b>ที่จะสร้างรายได้จริง เช่น รับเงินค่าสมาชิกล่วงหน้าทั้งปี</li>
+          <li><b>Unbilled (Accrued) Revenue</b> (รายได้ค้างรับ) — สร้างรายได้แล้วแต่ยัง<b>ไม่ได้รับเงินสด</b>และยังไม่รับรู้ ณ สิ้นงวดบัญชี</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ฝั่งค่าใช้จ่าย</h3>
+        <ul style="margin:0">
+          <li><b>Prepaid Expense</b> (ค่าใช้จ่ายจ่ายล่วงหน้า) — จ่ายเงินสด<b>ก่อน</b>ที่จะรับรู้เป็นค่าใช้จ่ายจริง เช่น จ่ายค่าเช่าล่วงหน้า</li>
+          <li><b>Accrued Expenses</b> (ค่าใช้จ่ายค้างจ่าย) — เกิดภาระค่าใช้จ่ายแล้วแต่ยัง<b>ไม่ได้จ่ายเงิน</b> ณ สิ้นงวด → กลายเป็นหนี้สินที่ต้องจ่ายในอนาคต</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+      <h3><Term id="valuationAdjustment">Valuation Adjustment</Term> — ปรับให้สะท้อนมูลค่าตลาดปัจจุบัน</h3>
+      <p style="color:var(--ink-2);margin:0 0 10px">เป็นการปรับปรุงสินทรัพย์หรือหนี้สินของกิจการให้บันทึกด้วย<b>มูลค่าตลาดปัจจุบัน</b>แทนราคาทุนเดิม — แต่กฎเกณฑ์ทางบัญชี<b>ไม่ได้บังคับ</b>ให้สินทรัพย์ทุกประเภทต้องบันทึกที่มูลค่าตลาดปัจจุบัน</p>
+      <p style="color:var(--ink-2);margin:0"><b>รูปแบบพื้นฐาน:</b> สินทรัพย์<b>เพิ่มขึ้น</b> → กำไรในงบกำไรขาดทุน หรือเพิ่ม Other Comprehensive Income · สินทรัพย์<b>ลดลง</b> → ขาดทุนในงบกำไรขาดทุน หรือลด Other Comprehensive Income</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="3" y="9" width="20" height="8" rx="2" fill="none" stroke="var(--slate)" stroke-width="1.8"/>
+        <circle cx="8" cy="13" r="1.4" fill="var(--slate)"/><circle cx="13" cy="13" r="1.4" fill="var(--slate)"/><circle cx="18" cy="13" r="1.4" fill="var(--slate)"/>
+      </svg>
+      <h2>ระบบบัญชี</h2>
+    </div>
+
+    <div class="card">
+      <p style="color:var(--ink-2);margin:0 0 10px"><b>ระบบบัญชี (Accounting Systems)</b> คือระบบบริหารจัดการข้อมูลทางการเงินและข้อมูลอื่นที่เกี่ยวข้อง เพื่อสนับสนุนการปฏิบัติงาน การบริหารความเสี่ยง การควบคุมภายใน การกำกับดูแลกิจการ และการตัดสินใจของผู้บริหารและผู้มีส่วนได้เสีย ครอบคลุมตั้งแต่การเก็บรวบรวม บันทึก ประมวลผล วิเคราะห์ จัดทำรายงาน ไปจนถึงการจัดเก็บและตรวจสอบข้อมูล</p>
+      <p style="color:var(--ink-3);font-size:.85rem;margin:0">ที่มา: สภาวิชาชีพบัญชี ในพระบรมราชูปถัมป์ (2566)</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:20px">
+      <div class="card">
+        <h3>นักวิเคราะห์ไม่ต้องรู้ลึกเท่านักบัญชี</h3>
+        <p style="color:var(--ink-2);margin:0">ตำราบัญชีมักอธิบายระบบบัญชีอย่างละเอียด เพราะนักบัญชีต้องเข้าใจทุกขั้นตอน — แต่<b>นักวิเคราะห์ไม่จำเป็นต้องรู้ลึกขนาดนั้น</b> แค่คุ้นเคยกับ "การไหล" ของข้อมูลผ่านระบบรายงานทางการเงินก็เพียงพอ</p>
+      </div>
+      <div class="card">
+        <h3>เดบิต-เครดิต</h3>
+        <p style="color:var(--ink-2);margin:0">ระบบบัญชีดั้งเดิมใช้คำว่า<b>เดบิต</b>และ<b>เครดิต</b>อธิบายการเปลี่ยนแปลงในบัญชี — ผลรวมของเดบิตจะเท่ากับผลรวมของเครดิตเสมอ แต่<b>นักวิเคราะห์เข้าใจกลไกการรายงานทางการเงินได้โดยไม่ต้องพูดในเชิงเดบิต-เครดิตเลยก็ได้</b></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <svg class="mark" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <circle cx="13" cy="13" r="10" fill="none" stroke="var(--violet)" stroke-width="1.8"/>
+        <path d="M8 13 L11 16 L18 9" stroke="var(--violet)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <h2>การใช้งบการเงินในการวิเคราะห์หลักทรัพย์</h2>
+    </div>
+    <p class="sec-sub">งบการเงินคือฐานของการวิเคราะห์เครดิตและการวิเคราะห์หุ้น รวมถึงการประเมินมูลค่าหลักทรัพย์ — แต่นักวิเคราะห์<b>ไม่มีสิทธิ์เข้าถึงระบบบัญชีหรือรายการบันทึกแต่ละตัว</b> ต้อง<b>อนุมาน</b>ธุรกรรมที่เกิดขึ้นจากการอ่านงบการเงินเท่านั้น</p>
+
+    <div class="exam">
+      <h4>จุดที่ดุลยพินิจเข้ามาเกี่ยวข้อง — และเป็นจุดอ่อนของระบบบัญชี <span class="tag">โน้ต</span></h4>
+      <p>ระบบรายงานทางการเงินต้องรองรับโมเดลธุรกิจที่ซับซ้อน ด้วยการบันทึกรายการค้างรับค้างจ่ายและการปรับมูลค่า — สองเรื่องนี้<b>ต้องใช้ดุลยพินิจอย่างมาก</b> ซึ่งเป็นที่มาของข้อจำกัดหลักของโมเดลบัญชี</p>
+      <p style="margin:0">ดุลยพินิจอาจ<b>ผิดพลาดโดยไม่ตั้งใจ</b> หรือแย่กว่านั้นคือถูก<b>ใช้เพื่อตกแต่งกำไรโดยเจตนา</b> — ขั้นแรกของการวิเคราะห์คือระบุให้ได้ว่าธุรกรรมประเภทค้างรับค้างจ่ายและปรับมูลค่าใดบ้างที่ปรากฏในงบ ซึ่งส่วนใหญ่หาได้จาก: ส่วนนโยบาย/ประมาณการทางบัญชีที่สำคัญใน MD&A, หมายเหตุนโยบายบัญชีที่สำคัญ, และรายงานประจำปี</p>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+      <h3>การบิดเบือนข้อมูล (Misrepresentations)</h3>
+      <p style="color:var(--ink-2);margin:0">การวิเคราะห์อัตราส่วน (Ratio Analysis) ช่วยตรวจจับตัวเลขที่ผิดปกติในบัญชีเหล่านี้ได้ — และสมการบัญชีเองก็ใช้เป็นเครื่องมือระบุจุดที่มีความเสี่ยงว่าจะมีการทำบัญชีแบบก้าวร้าวหรือฉ้อฉลได้เช่นกัน</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h3>สรุปบทที่ 2</h3>
+      <ul>
+        <li>กระบวนการทางบัญชีเป็นองค์ประกอบหลักของการรายงานทางการเงิน — แปลงธุรกรรมทางธุรกิจให้เป็นบันทึกที่จำเป็นต่อการสร้างรายงานประจำงวด</li>
+        <li>กิจกรรมทางธุรกิจแบ่งได้ 3 กลุ่ม: ดำเนินงาน ลงทุน จัดหาเงิน</li>
+        <li>รายการค้างรับค้างจ่ายเป็นส่วนจำเป็นของกระบวนการบัญชี ออกแบบมาเพื่อจัดสรรกิจกรรมให้ตรงงวดบัญชีที่ถูกต้อง</li>
+        <li>ผลลัพธ์ของกระบวนการบัญชีคือรายงานทางการเงิน — ซึ่งฝ่ายบริหารสามารถตกแต่งได้ ผู้วิเคราะห์ที่ช่างสังเกตจะใช้ความเข้าใจกลไกนี้ตรวจจับการบิดเบือนข้อมูลได้</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Financial Statement Analysis (BS923102) · บทที่ 2: Financial Reporting Mechanics · เรียบเรียงจากเอกสารประกอบการสอน — Asst Prof. Dr. Chamaiporn Kumpamool
+  </footer>
+
 </Layout>
