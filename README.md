@@ -7,11 +7,10 @@
 
 ## ขอบเขตสอบ Midterm
 
-จากโน้ตในเอกสาร CH5: **บทที่ 1–5 · 70 ข้อ · 4 ตัวเลือก · ใช้เครื่องคิดเลขได้ · อาจมีข้อสอบเป็นภาษาอังกฤษ**
+จากโน้ตในเอกสาร CH5: **70 ข้อ · 4 ตัวเลือก · ใช้เครื่องคิดเลขได้ · อาจมีข้อสอบเป็นภาษาอังกฤษ**
 
 | บท | ชื่อบท | ไฟล์ต้นฉบับ |
 | --- | --- | --- |
-| 1 | Introduction to Financial Statement Analysis | ⚠️ ยังไม่มีไฟล์ |
 | 2 | Financial Reporting Mechanics | `CH 2 FSA 1.68_Student.pdf` / `.md` |
 | 3 | Financial Reporting Standards | `CH 3 FSA 1.69_Student.pdf` / `.md` |
 | 4 | Understanding Financial Statements | `CH 4 FSA 1.69_Students.pdf` / `.md` |
