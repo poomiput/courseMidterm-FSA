@@ -256,4 +256,89 @@ export const terms = {
     full: "",
     def: "การคำนวณแต่ละรายการในงบกระแสเงินสดเป็น % ของกระแสเงินสดเข้า(ออก)รวม หรือเป็น % ของรายได้สุทธิ เพื่อเปรียบเทียบโครงสร้างกระแสเงินสดข้ามงวดหรือข้ามบริษัท",
   },
+  equityAnalysis: {
+    term: "Equity Analysis",
+    full: "การวิเคราะห์เชิงหุ้น",
+    def: "การวิเคราะห์งบการเงินจากมุมมองเจ้าของกิจการ เน้นการประเมินมูลค่า (valuation) ผลการดำเนินงาน และให้น้ำหนักกับการเติบโตของกิจการมากกว่าความเสี่ยง",
+  },
+  creditAnalysis: {
+    term: "Credit Analysis",
+    full: "การวิเคราะห์เชิงเครดิต",
+    def: "การวิเคราะห์งบการเงินจากมุมมองเจ้าหนี้ เช่น ธนาคารหรือผู้ถือหุ้นกู้ ให้น้ำหนักกับความเสี่ยงในการได้รับชำระคืนมากกว่าการเติบโต",
+  },
+  regressionAnalysis: {
+    term: "Regression Analysis",
+    full: "การวิเคราะห์การถดถอย",
+    def: "เทคนิคทางสถิติที่ช่วยหาความสัมพันธ์ระหว่างตัวแปร เช่น ยอดขายกับ GDP ในรูปสมการ Y = a + bX เพื่อใช้พยากรณ์",
+  },
+  activityRatios: {
+    term: "Activity Ratios",
+    full: "อัตราส่วนกิจกรรม",
+    def: "หรือเรียกว่า Asset Utilization / Operating Efficiency Ratios วัดว่ากิจการใช้สินทรัพย์มีประสิทธิภาพแค่ไหน โดยผสมข้อมูลจากงบกำไรขาดทุน (ตัวเศษ) กับงบฐานะการเงิน (ตัวส่วน)",
+  },
+  inventoryTurnover: {
+    term: "Inventory Turnover",
+    full: "อัตราการหมุนเวียนสินค้าคงเหลือ",
+    def: "COGS หารด้วย Average Inventory บอกว่าสินค้าคงเหลือ 1 หน่วยสร้างยอดขายได้กี่รอบในหนึ่งงวด",
+  },
+  receivablesTurnover: {
+    term: "Receivables Turnover",
+    full: "อัตราการหมุนของลูกหนี้การค้า",
+    def: "Revenue หารด้วย Average Receivables บอกว่าลูกหนี้การค้า 1 เท่าสร้างยอดขายได้เท่าไหร่ในหนึ่งงวด",
+  },
+  defensiveIntervalRatio: {
+    term: "Defensive Interval Ratio",
+    full: "อัตราส่วนช่วงระยะเวลาป้องกัน",
+    def: "(เงินสด + หลักทรัพย์ระยะสั้น + ลูกหนี้) หารด้วยค่าใช้จ่ายดำเนินงานเป็นเงินสดต่อวัน บอกว่ากิจการอยู่ได้กี่วันโดยไม่มีเงินสดไหลเข้าเพิ่ม ยิ่งสูงยิ่งดี",
+  },
+  financialLeverageRatio: {
+    term: "Financial Leverage Ratio",
+    full: "อัตราส่วนความเสี่ยงทางการเงิน",
+    def: "Average Total Assets หารด้วย Average Total Equity บอกโครงสร้างเงินทุนของกิจการ — สูงแปลว่าใช้หนี้หนุนสินทรัพย์มาก เป็นหนึ่งใน 5 ตัวขับเคลื่อนของ DuPont Analysis",
+  },
+  interestCoverage: {
+    term: "Interest Coverage",
+    full: "ความสามารถชำระดอกเบี้ย",
+    def: "EBIT หารด้วย Interest Payments บอกว่ากำไรจากการดำเนินงานเพียงพอชำระดอกเบี้ยจ่ายหรือไม่ ยิ่งสูงยิ่งดี",
+  },
+  netProfitMargin: {
+    term: "Net Profit Margin",
+    full: "อัตรากำไรสุทธิ",
+    def: "Net Income หารด้วย Revenue คูณ 100 บอกว่าในยอดขาย 100 บาทสร้างกำไรสุทธิได้เท่าไหร่ — เป็นหนึ่งในตัวขับเคลื่อนของ DuPont Analysis (แตกต่อเป็น Tax Burden × Interest Burden × EBIT Margin)",
+  },
+  roa: {
+    term: "ROA",
+    full: "Return on Assets",
+    def: "Net Income หารด้วย Average Total Assets คูณ 100 วัดความสามารถทำกำไรจากสินทรัพย์ทั้งหมดของกิจการ = Net Profit Margin × Total Asset Turnover",
+  },
+  roe: {
+    term: "ROE",
+    full: "Return on Equity",
+    def: "Net Income หารด้วย Average Total Equity คูณ 100 วัดผลตอบแทนที่ผู้ถือหุ้นได้รับ — DuPont Analysis แยกตัวนี้ออกเป็น 5 ตัวขับเคลื่อนเพื่อดูว่าผลตอบแทนมาจากไหนจริง ๆ",
+  },
+  taxBurden: {
+    term: "Tax Burden",
+    full: "ภาระภาษี",
+    def: "Net Income หารด้วย EBT วัดผลของภาษีต่อ ROE — ค่าสูงแปลว่าอัตราภาษีที่แท้จริงต่ำ (เก็บกำไรไว้ได้มาก) เป็นหนึ่งใน 5 ตัวขับเคลื่อนของ DuPont Analysis",
+  },
+  interestBurden: {
+    term: "Interest Burden",
+    full: "ภาระดอกเบี้ย",
+    def: "EBT หารด้วย EBIT วัดผลของดอกเบี้ยจ่ายต่อ ROE — ค่าสูงแปลว่าภาระดอกเบี้ยต่ำ เป็นหนึ่งใน 5 ตัวขับเคลื่อนของ DuPont Analysis",
+  },
+  peRatio: {
+    term: "P/E Ratio",
+    full: "Price to Earnings",
+    def: "ราคาต่อหุ้นหารด้วยกำไรต่อหุ้น (EPS) — มุมนักลงทุนอยากได้ P/E ต่ำ มุมบริษัทอยากให้ P/E สูงเพราะแปลว่านักลงทุนยอมจ่ายแพงกว่ากำไรที่ทำได้",
+  },
+  basicEps: {
+    term: "Basic EPS",
+    full: "กำไรสุทธิต่อหุ้นขั้นพื้นฐาน",
+    def: "(กำไรสุทธิ − เงินปันผลหุ้นบุริมสิทธิ์) หารด้วยจำนวนหุ้นสามัญถัวเฉลี่ยถ่วงน้ำหนักที่ออกจำหน่ายและชำระแล้ว",
+  },
+  ebitda: {
+    term: "EBITDA",
+    full: "Earnings Before Interest, Taxes, Depreciation and Amortization",
+    def: "กำไรก่อนดอกเบี้ย ภาษี ค่าเสื่อมราคา และค่าตัดจำหน่าย — คำนวณจาก EBIT บวกค่าเสื่อมราคาและค่าตัดจำหน่ายกลับเข้าไป ใช้วัด cash-generating power ที่ไม่ถูกกัดกินโดยรายการที่ไม่ใช่เงินสด",
+  },
 };
